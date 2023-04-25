@@ -1,0 +1,76 @@
+/* Chase.com colors */
+:root {
+    --chase-blue: #0d2f6f;
+    --chase-light-blue: #00a3e0;
+    --chase-gray: #d9d9d9;
+    --chase-dark-gray: #4d4d4f;
+    --chase-white: #ffffff;
+}
+
+.homepage {
+    font-family: Arial, sans-serif;
+    color: var(--chase-dark-gray);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--chase-blue);
+    padding: 1rem;
+    color: var(--chase-white);
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--chase-white);
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.features,
+.benefits,
+.pricing {
+    padding: 2rem;
+    background-color: var(--chase-white);
+    border: 1px dashed var(--chase-gray);
+    border-radius: 5px;
+    margin: 2rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+/* Add further styling for the scrapbook aesthetic and other elements */
+
+ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid var(--chase-gray);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+th {
+    background-color: var(--chase-light-blue);
+    color: var(--chase-white);
+}
+
+/* You can add more CSS styles to further enhance the scrapbook aesthetic and improve the layout */
