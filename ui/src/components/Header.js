@@ -1,17 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.svg"; // Replace with the path to your logo file
 
 function Header() {
   return (
-    <header className="header">
-      <h1> <Link to="/" className="brand-name">QueueHero</Link></h1>
+    <header>
       <nav>
-        <Link to="/register" className="nav-link">
-          Sign Up
+        <Link to="/" className="brand-logo">
+          <img src={logo} alt="QueueHero Logo" />
         </Link>
-        <Link to="/login" className="nav-link">
-          Log In
-        </Link>
+        <ul>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+          {/* Add more navigation links as needed */}
+        </ul>
       </nav>
     </header>
   );
