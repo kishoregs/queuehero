@@ -14,6 +14,10 @@ const Login = () => {
       const response = await api.post("/login", { email, password });
 
       if (response.status === 200) {
+        const { token } = response.data;
+
+        // Store the token
+        localStorage.setItem("token", token);
         // Redirect to the dashboard
         navigate("/dashboard");
         // Perform further actions after a successful login, e.g., redirecting to the user dashboard

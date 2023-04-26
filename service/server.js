@@ -4,11 +4,15 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const User = require("./models/User");
+const jwt = require("jsonwebtoken");
+
+const businessRoutes = require("./routes/businessRoutes");
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use("/businesses", businessRoutes);
 
 const port = process.env.PORT || 3000;
 
@@ -67,7 +71,20 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    res.status(200).json({ message: "Logged in successfully", user });
+    // Generate the JWT token
+    const token = jwt.sign(
+      { _id: user._id.toString() },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    // Save the token to the user's document in the database (optional)
+
+    // Send the token and user information to the frontend
+    // res.status(200).json({ success: true, token, user });
+    res.status(200).json({ message: "Logged in successfully", token, user });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

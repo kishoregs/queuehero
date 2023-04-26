@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import BusinessProfile from "./components/BusinessProfile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/business/:id" element={<BusinessProfile/>} />
           </Routes>
         </div>
 
