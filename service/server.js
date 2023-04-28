@@ -81,6 +81,8 @@ app.post("/login", async (req, res) => {
     );
 
     // Save the token to the user's document in the database (optional)
+    user.tokens = user.tokens.concat({ token });
+    await user.save();
 
     // Send the token and user information to the frontend
     // res.status(200).json({ success: true, token, user });

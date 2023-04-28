@@ -1,17 +1,19 @@
 html,
 body {
   height: 100%;
-  margin: 0;
+  
 }
 
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  
 }
 
 .content-container {
   flex-grow: 1;
+  margin: 3rem;
 }
 
 
@@ -297,4 +299,136 @@ header nav ul li a:hover {
 
 .content-container::-webkit-scrollbar {
   display: none;
+}
+
+
+/* ManageBusinessProfiles.css */
+.manage-business-profiles {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+}
+
+.manage-business-profiles h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #0067b3;
+  margin-bottom: 1rem;
+}
+
+.manage-business-profiles .business-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.business-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.business-card h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #0067b3;
+  margin-bottom: 0.5rem;
+}
+
+.business-card .button {
+  align-self: flex-end;
+  background-color: #0067b3;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.business-card .button:hover {
+  background-color: #004b8a;
+}
+
+/* BusinessForm.css */
+.business-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: #000;
+}
+
+.business-form label {
+  font-weight: bold;
+}
+
+.business-form input[type='text'],
+.business-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.business-form button {
+  align-self: flex-end;
+  background-color: #0067b3;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.business-form button:hover {
+  background-color: #004b8a;
+}
+
+/* Other related components */
+button.delete-button {
+  background-color: #d00000;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+button.delete-button:hover {
+  background-color: #a70000;
+}
+
+
+.form-buttons {
+  
+  justify-content: flex-end; /* Change this line */
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.submit-button,
+.cancel-button {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.cancel-button:hover {
+  background-color: #bbb;
 }

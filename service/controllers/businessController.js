@@ -1,91 +1,66 @@
-const Business = require("../models/business");
+// controllers/businessController.js
+const Business = require("../models/Business");
 
-// Create a new business
+exports.getBusinesses = async (req, res) => {
+  try {
+    const businesses = await Business.find();
+    res.json(businesses);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching businesses" });
+  }
+};
+
+exports.getBusinessById = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    if (!business) {
+      res.status(404).json({ message: "Business not found" });
+    } else {
+      res.json(business);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching business" });
+  }
+};
+
 exports.createBusiness = async (req, res) => {
   try {
-    const businessData = {
-      ...req.body,
-      ownerId: req.user._id,
-    };
-
-    const newBusiness = new Business(businessData);
-    await newBusiness.save();
-
-    res.status(201).json({ success: true, data: newBusiness });
+    const business = new Business({ ...req.body, ownerId: req.user._id });
+    await business.save();
+    res.status(201).json(business);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: "Error creating business" });
   }
 };
 
-// Get a single business by ID
-exports.getBusiness = async (req, res) => {
-  try {
-    const business = await Business.findById(req.params.id);
-    if (!business) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Business not found" });
-    }
-
-    res.status(200).json({ success: true, data: business });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-// Update a business by ID
 exports.updateBusiness = async (req, res) => {
   try {
-    const business = await Business.findById(req.params.id);
+    const business = await Business.findOneAndUpdate(
+      { _id: req.params.id, ownerId: req.user._id },
+      req.body,
+      { new: true }
+    );
+
     if (!business) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Business not found" });
+      res.status(404).json({ message: "Business not found" });
+    } else {
+      res.json(business);
     }
-
-    if (business.ownerId.toString() !== req.user._id.toString()) {
-      return res
-        .status(403)
-        .json({
-          success: false,
-          message: "You do not have permission to edit this business",
-        });
-    }
-
-    Object.assign(business, req.body);
-    await business.save();
-
-    res.status(200).json({ success: true, data: business });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: "Error updating business" });
   }
 };
 
-// Delete a business by ID
 exports.deleteBusiness = async (req, res) => {
   try {
-    const business = await Business.findById(req.params.id);
+    const business = await Business.findOneAndDelete({ _id: req.params.id, ownerId: req.user._id });
+
     if (!business) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Business not found" });
+      res.status(404).json({ message: "Business not found" });
+    } else {
+      res.json({ message: "Business deleted" });
     }
-
-    if (business.ownerId.toString() !== req.user._id.toString()) {
-      return res
-        .status(403)
-        .json({
-          success: false,
-          message: "You do not have permission to delete this business",
-        });
-    }
-
-    await business.remove();
-
-    res
-      .status(200)
-      .json({ success: true, message: "Business deleted successfully" });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: "Error deleting business" });
   }
 };

@@ -3,7 +3,7 @@ import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () => {
 
         // Store the token
         localStorage.setItem("token", token);
+        setIsLoggedIn(true);
         // Redirect to the dashboard
         navigate("/dashboard");
         // Perform further actions after a successful login, e.g., redirecting to the user dashboard

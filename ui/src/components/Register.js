@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import api from "../api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Register = () => {
+
+
+const Register = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [name, setName] = useState("");
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +19,13 @@ const Register = () => {
 
       if (response.status === 201) {
         alert("Registration successful! You can now log in.");
+        const { token } = response.data;
+
+        // Store the token
+        localStorage.setItem("token", token);
+        setIsLoggedIn(true);
+        // Redirect to the dashboard
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);

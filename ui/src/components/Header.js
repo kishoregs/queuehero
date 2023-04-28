@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg"; // Replace with the path to your logo file
 
-function Header() {
+function Header({ isLoggedIn }) {
   return (
     <header>
       <nav>
@@ -10,6 +10,11 @@ function Header() {
           <img src={logo} alt="QueueHero Logo" />
         </Link>
         <ul>
+          {isLoggedIn && (
+            <li>
+              <Link to="/manage-businesses">Manage Business Profiles</Link>
+            </li>
+          )}
           <li>
             <Link to="/login">Login</Link>
           </li>
