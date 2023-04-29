@@ -4,7 +4,6 @@ import BusinessProfile from "./BusinessProfile";
 import BusinessForm from "./BusinessForm";
 import api from "../api";
 
-
 const ManageBusinessProfiles = () => {
   const [businesses, setBusinesses] = useState([]);
   const [selectedBusiness, setSelectedBusiness] = useState(null);
@@ -64,11 +63,21 @@ const ManageBusinessProfiles = () => {
             />
           ))}
         </div>
+        <br></br>
         <div className="form">
           {selectedBusiness ? (
-            <BusinessForm onSubmit={handleUpdate} business={selectedBusiness} />
+            <div>
+              <h2>Update Business Profile</h2>
+              <BusinessForm
+                onSubmit={handleUpdate}
+                business={selectedBusiness}
+              />
+            </div>
           ) : (
-            <BusinessForm onSubmit={handleCreate} />
+            <div>
+              <h2>Create New Business Profile</h2>
+              <BusinessForm onSubmit={handleCreate} />
+            </div>
           )}
         </div>
       </div>

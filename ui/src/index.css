@@ -1,14 +1,14 @@
 html,
 body {
   height: 100%;
-  
+
 }
 
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  
+
 }
 
 .content-container {
@@ -280,7 +280,8 @@ header nav ul li a:hover {
 
 .content-container {
   position: relative;
-  padding-right: 18px; /* Adjust this value depending on the width of the scrollbar in your browser */
+  padding-right: 18px;
+  /* Adjust this value depending on the width of the scrollbar in your browser */
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -291,7 +292,8 @@ header nav ul li a:hover {
   position: absolute;
   right: 0;
   top: 0;
-  width: 18px; /* Adjust this value depending on the width of the scrollbar in your browser */
+  width: 18px;
+  /* Adjust this value depending on the width of the scrollbar in your browser */
   height: 100%;
   background: inherit;
   pointer-events: none;
@@ -409,8 +411,9 @@ button.delete-button:hover {
 
 
 .form-buttons {
-  
-  justify-content: flex-end; /* Change this line */
+
+  justify-content: flex-end;
+  /* Change this line */
   align-items: center;
   margin-top: 20px;
   width: 100%;
@@ -431,4 +434,26 @@ button.delete-button:hover {
 
 .cancel-button:hover {
   background-color: #bbb;
+}
+
+.edit-button,
+.delete-button {
+  background-color: #0f5ba7;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #063d6e;
 }

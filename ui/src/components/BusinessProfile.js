@@ -2,7 +2,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const BusinessProfile = ({ business, onDelete }) => {
   return (
     <div className="container">
@@ -27,15 +26,15 @@ const BusinessProfile = ({ business, onDelete }) => {
           ))}
         </ul>
         <div className="buttons">
-          <Link className="button" to={`/edit-business/${business._id}`}>
-            Edit
-          </Link>
           <button
-            className="button delete"
+            className="delete-button"
             onClick={() => onDelete(business._id)}
           >
             Delete
           </button>
+          <Link className="edit-button" to={`/edit-business/${business._id}`}>
+            Edit
+          </Link>
         </div>
       </div>
     </div>
