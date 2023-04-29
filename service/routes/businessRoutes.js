@@ -8,10 +8,15 @@ const {
   deleteBusiness,
   getBusinesses,
   searchBusinesses,
+  updateWaitlist,
+  addCustomerToWaitlist,
 } = require("../controllers/businessController");
 
 // Place the search route before the :id route
 router.get("/search", searchBusinesses);
+router.post("/:id/waitlist", isAuthenticated, addCustomerToWaitlist);
+
+router.put("/:id/waitlist", isAuthenticated, updateWaitlist);
 
 router.post("/", isAuthenticated, createBusiness);
 router.get("/:id", isAuthenticated, getBusinessById);

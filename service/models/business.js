@@ -10,6 +10,12 @@ const businessSchema = new mongoose.Schema({
   hours: String,
   services: [String],
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  waitlist: [
+    {
+      customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      waitTime: Number,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Business", businessSchema);

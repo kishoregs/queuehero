@@ -82,3 +82,49 @@ exports.searchBusinesses = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+exports.addCustomerToWaitlist = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    if (!business) {
+      return res.status(404).send("Business not found");
+    }
+
+    // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
+    const customerId = req.body.customerId;
+    const waitTime = req.body.waitTime;
+
+    // Add the customer to the waitlist
+    business.waitlist.push({ customerId, waitTime });
+    await business.save();
+
+    res.status(201).send(business.waitlist);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.updateWaitlist = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    if (!business) {
+      return res.status(404).send("Business not found");
+    }
+
+    // Update wait times for customers in the waitlist
+    business.waitlist.forEach((customer) => {
+      customer.waitTime -= req.body.timeElapsed;
+
+      // Remove customers whose wait time has exceeded the maximum allowed wait time
+      if (customer.waitTime <= 0) {
+        business.waitlist.pull(customer);
+      }
+    });
+
+    await business.save();
+
+    res.status(200).send(business.waitlist);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
