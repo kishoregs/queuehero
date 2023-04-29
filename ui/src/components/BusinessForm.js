@@ -46,7 +46,15 @@ const BusinessForm = ({ onSubmit, business }) => {
           value={formData.description}
           onChange={handleChange}
         />
-
+         <label htmlFor="location">Location</label>
+        <input
+          type="text"
+          name="location"
+          id="location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="address">Address</label>
         <input
           type="text"

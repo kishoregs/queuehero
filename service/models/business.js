@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const businessSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  location: String,
   description: String,
   address: String,
   contactEmail: String,

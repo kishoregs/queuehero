@@ -53,7 +53,10 @@ exports.updateBusiness = async (req, res) => {
 
 exports.deleteBusiness = async (req, res) => {
   try {
-    const business = await Business.findOneAndDelete({ _id: req.params.id, ownerId: req.user._id });
+    const business = await Business.findOneAndDelete({
+      _id: req.params.id,
+      ownerId: req.user._id,
+    });
 
     if (!business) {
       res.status(404).json({ message: "Business not found" });
@@ -62,5 +65,20 @@ exports.deleteBusiness = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Error deleting business" });
+  }
+};
+
+exports.searchBusinesses = async (req, res) => {
+  try {
+    const { location } = req.query;
+    console.log('Received search request:', req.query);
+    if (!location) {
+      return res.status(400).json({ error: "Location is required" });
+    }
+
+    const businesses = await Business.find({ location });
+    res.status(200).json({ businesses });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
   }
 };

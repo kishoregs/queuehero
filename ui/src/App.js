@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import ManageBusinessProfiles from "./components/ManageBusinessProfiles";
 import EditBusinessProfile from './components/EditBusinessProfile';
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (

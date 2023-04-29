@@ -6,8 +6,12 @@ const {
   getBusinessById,
   updateBusiness,
   deleteBusiness,
-  getBusinesses
+  getBusinesses,
+  searchBusinesses,
 } = require("../controllers/businessController");
+
+// Place the search route before the :id route
+router.get("/search", searchBusinesses);
 
 router.post("/", isAuthenticated, createBusiness);
 router.get("/:id", isAuthenticated, getBusinessById);

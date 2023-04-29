@@ -10,6 +10,8 @@ const BusinessProfile = ({ business, onDelete }) => {
         <h2>{business.name}</h2>
         <label>Description</label>
         <p>{business.description}</p>
+        <label>Location</label>
+        <p>{business.location}</p>
         <label>Address</label>
         <p>{business.address}</p>
         <label>Contact Email</label>
