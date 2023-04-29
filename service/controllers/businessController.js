@@ -72,9 +72,9 @@ exports.searchBusinesses = async (req, res) => {
   try {
     const { location } = req.query;
     console.log('Received search request:', req.query);
-    if (!location) {
-      return res.status(400).json({ error: "Location is required" });
-    }
+    // if (!location) {
+    //   return res.status(400).json({ error: "Location is required" });
+    // }
 
     const businesses = await Business.find({ location });
     res.status(200).json({ businesses });

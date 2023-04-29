@@ -6,6 +6,8 @@ const BusinessForm = ({ onSubmit, business }) => {
   const [formData, setFormData] = useState({
     name: business ? business.name : "",
     description: business ? business.description : "",
+    location: business ? business.location : "",
+
     address: business ? business.address : "",
     contactEmail: business ? business.contactEmail : "",
     contactPhone: business ? business.contactPhone : "",
@@ -46,7 +48,7 @@ const BusinessForm = ({ onSubmit, business }) => {
           value={formData.description}
           onChange={handleChange}
         />
-         <label htmlFor="location">Location</label>
+        <label htmlFor="location">Location</label>
         <input
           type="text"
           name="location"
@@ -103,7 +105,6 @@ const BusinessForm = ({ onSubmit, business }) => {
         />
 
         <div className="form-buttons">
-         
           <button
             type="button"
             className="cancel-button"

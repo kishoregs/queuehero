@@ -9,6 +9,8 @@ import BusinessList from "../components/BusinessList";
 const HomePage = () => {
   const searchBusinesses = async (location) => {
     try {
+      if(!location)
+      location = '';
       const response = await api.get(`/businesses/search?location=${location}`);
 
       return response.data;
