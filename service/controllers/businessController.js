@@ -92,10 +92,12 @@ exports.addCustomerToWaitlist = async (req, res) => {
 
     // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
     const customerId = req.body.customerId;
+    const name = req.body.name;
+    const email = req.body.email;
     const waitTime = req.body.waitTime;
 
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId, waitTime });
+    business.waitlist.push({ customerId,name,email,waitTime });
     await business.save();
 
     res.status(201).send(business.waitlist);
@@ -133,17 +135,7 @@ exports.updateWaitlist = async (req, res) => {
 exports.getWaitlist = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
-    const userIndex = business.waitlist.findIndex(
-      (entry) => entry.user.toString() === req.params.userId
-    );
-
-    if (userIndex !== -1) {
-      business.waitlist[userIndex].waitTime = req.body.waitTime;
-      await business.save();
-      res.send(business.waitlist[userIndex]);
-    } else {
-      res.status(404).send({ error: "User not found in waitlist" });
-    }
+    res.send(business.waitlist);
   } catch (error) {
     res.status(500).send(error);
   }

@@ -4,6 +4,10 @@ import "./WaitlistForm.css";
 
 const WaitlistForm = ({ businessId }) => {
   const [customerId, setCustomerId] = useState("");
+  const [name, setCustomerName] = useState("");
+
+  const [email, setCustomerEmail] = useState("");
+
   const [waitTime, setWaitTime] = useState("");
 
   const handleSubmit = async (e) => {
@@ -11,6 +15,8 @@ const WaitlistForm = ({ businessId }) => {
     try {
       await api.post(`/businesses/${businessId}/waitlist`, {
         customerId,
+        name,
+        email,
         waitTime,
       });
       setCustomerId("");
@@ -30,6 +36,24 @@ const WaitlistForm = ({ businessId }) => {
           type="text"
           value={customerId}
           onChange={(e) => setCustomerId(e.target.value)}
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setCustomerName(e.target.value)}
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="name">Email:</label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setCustomerEmail(e.target.value)}
         />
       </div>
       <div className="input-group">

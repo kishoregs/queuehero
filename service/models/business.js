@@ -13,6 +13,8 @@ const businessSchema = new mongoose.Schema({
   waitlist: [
     {
       customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      name: { type: String, required: true },
+      email: { type: String, required: true },
       waitTime: { type: Number, default: 0 },
     },
   ],
