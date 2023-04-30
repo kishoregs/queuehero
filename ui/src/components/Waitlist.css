@@ -1,0 +1,30 @@
+/* Waitlist.css */
+.waitlist {
+    margin-top: 1rem;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.waitlist th,
+.waitlist td {
+    text-align: left;
+    padding: 8px;
+}
+
+.waitlist th {
+    background-color: #f2f2f2;
+}
+
+.waitlist tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.waitlist tr:hover {
+    background-color: #ddd;
+}
+
+.update-wait-time-input {
+    width: 50px;
+    padding: 5px;
+    margin-right: 5px;
+}

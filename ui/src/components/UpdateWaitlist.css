@@ -1,0 +1,50 @@
+.update-waitlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.update-waitlist-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.update-waitlist-container label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.update-waitlist-container input {
+    font-size: 14px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.update-waitlist-button {
+    background-color: #0f4c81;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.update-waitlist-button:hover {
+    background-color: #0d3c6a;
+    transform: scale(1.05);
+}
+
+.update-waitlist-button:active {
+    background-color: #0a2d52;
+    transform: scale(1);
+}

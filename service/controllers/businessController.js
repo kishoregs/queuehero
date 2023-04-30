@@ -1,5 +1,5 @@
 // controllers/businessController.js
-const Business = require("../models/Business");
+const Business = require("../models/business");
 
 exports.getBusinesses = async (req, res) => {
   try {
@@ -71,7 +71,7 @@ exports.deleteBusiness = async (req, res) => {
 exports.searchBusinesses = async (req, res) => {
   try {
     const { location } = req.query;
-    console.log('Received search request:', req.query);
+    console.log("Received search request:", req.query);
     // if (!location) {
     //   return res.status(400).json({ error: "Location is required" });
     // }
@@ -124,6 +124,26 @@ exports.updateWaitlist = async (req, res) => {
     await business.save();
 
     res.status(200).send(business.waitlist);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+// Get the waitlist for a business
+exports.getWaitlist = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    const userIndex = business.waitlist.findIndex(
+      (entry) => entry.user.toString() === req.params.userId
+    );
+
+    if (userIndex !== -1) {
+      business.waitlist[userIndex].waitTime = req.body.waitTime;
+      await business.save();
+      res.send(business.waitlist[userIndex]);
+    } else {
+      res.status(404).send({ error: "User not found in waitlist" });
+    }
   } catch (error) {
     res.status(500).send(error);
   }

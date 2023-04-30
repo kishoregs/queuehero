@@ -13,7 +13,7 @@ const businessSchema = new mongoose.Schema({
   waitlist: [
     {
       customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      waitTime: Number,
+      waitTime: { type: Number, default: 0 },
     },
   ],
 });
