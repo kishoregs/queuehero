@@ -54,7 +54,6 @@ const Dashboard = () => {
               <li>Improve customer satisfaction and experience</li>
             </ul>
           </section>
-         
         </div>
       </main>
     </div>

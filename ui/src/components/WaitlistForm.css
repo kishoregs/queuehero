@@ -1,18 +1,19 @@
-.waitlist-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.waitlist-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
     max-width: 400px;
-    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.input-group {
+.form-input-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.submit-button {
+.waitlist-form-submit {
     background-color: #0066cc;
     color: #fff;
     border: none;
@@ -21,6 +22,6 @@
     font-size: 14px;
 }
 
-.submit-button:hover {
+.waitlist-form-submit:hover {
     background-color: #0051a8;
 }

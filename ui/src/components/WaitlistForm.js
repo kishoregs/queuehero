@@ -5,9 +5,7 @@ import "./WaitlistForm.css";
 const WaitlistForm = ({ businessId }) => {
   const [customerId, setCustomerId] = useState("");
   const [name, setCustomerName] = useState("");
-
   const [email, setCustomerEmail] = useState("");
-
   const [waitTime, setWaitTime] = useState("");
 
   const handleSubmit = async (e) => {
@@ -28,8 +26,8 @@ const WaitlistForm = ({ businessId }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="waitlist-form">
-      <div className="input-group">
+    <form onSubmit={handleSubmit} className="waitlist-form-container">
+      <div className="form-input-group">
         <label htmlFor="customerId">Customer ID:</label>
         <input
           id="customerId"
@@ -38,7 +36,7 @@ const WaitlistForm = ({ businessId }) => {
           onChange={(e) => setCustomerId(e.target.value)}
         />
       </div>
-      <div className="input-group">
+      <div className="form-input-group">
         <label htmlFor="name">Name:</label>
         <input
           id="name"
@@ -47,8 +45,8 @@ const WaitlistForm = ({ businessId }) => {
           onChange={(e) => setCustomerName(e.target.value)}
         />
       </div>
-      <div className="input-group">
-        <label htmlFor="name">Email:</label>
+      <div className="form-input-group">
+        <label htmlFor="email">Email:</label>
         <input
           id="email"
           type="email"
@@ -56,7 +54,7 @@ const WaitlistForm = ({ businessId }) => {
           onChange={(e) => setCustomerEmail(e.target.value)}
         />
       </div>
-      <div className="input-group">
+      <div className="form-input-group">
         <label htmlFor="waitTime">Wait Time (in minutes):</label>
         <input
           id="waitTime"
@@ -65,7 +63,7 @@ const WaitlistForm = ({ businessId }) => {
           onChange={(e) => setWaitTime(e.target.value)}
         />
       </div>
-      <button type="submit" className="submit-button">
+      <button type="submit" className="waitlist-form-submit">
         Add to Waitlist
       </button>
     </form>

@@ -31,18 +31,6 @@
     background-color: #005ea9;
 }
 
-.waitlist-form-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    border-radius: 4px;
-    padding: 1rem;
-    z-index: 100;
-    width: 90%;
-    max-width: 400px;
-}
 
 .contact-info p {
     margin-bottom: 0.5rem;
