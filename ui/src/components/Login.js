@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./Login.css";
+
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -34,38 +36,46 @@ const Login = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="form-title">Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit">Login</button>
-        </div>
-        <div className="form-group">
-          <Link to="/register">Don't have an account? Register here.</Link>
-        </div>
-      </form>
+    <div className="login-container">
+      <div className="login-form">
+        <h2 className="form-title">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="submit-button">
+              Login
+            </button>
+          </div>
+          <div className="form-group">
+            <Link to="/register" className="register-link">
+              Don't have an account? Register here.
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

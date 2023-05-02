@@ -1,27 +1,61 @@
 // BusinessForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./BusinessForm.css";
 
-const BusinessForm = ({ onSubmit, business }) => {
-  const [formData, setFormData] = useState({
-    name: business ? business.name : "",
-    description: business ? business.description : "",
-    location: business ? business.location : "",
+const initialFormData = {
+  name: "",
+  description: "",
+  location: "",
+  address: "",
+  contactEmail: "",
+  contactPhone: "",
+  hours: "",
+  services: [],
+};
 
-    address: business ? business.address : "",
-    contactEmail: business ? business.contactEmail : "",
-    contactPhone: business ? business.contactPhone : "",
-    hours: business ? business.hours : "",
-    services: business ? business.services : [],
-  });
+
+
+const BusinessForm = ({ onSubmit, business, resetForm}) => {
+
+ 
+
+  // {
+  //   name: business ? business.name : "",
+  //   description: business ? business.description : "",
+  //   location: business ? business.location : "",
+
+  //   address: business ? business.address : "",
+  //   contactEmail: business ? business.contactEmail : "",
+  //   contactPhone: business ? business.contactPhone : "",
+  //   hours: business ? business.hours : "",
+  //   services: business ? business.services : [],
+  // }
+  const [formData, setFormData] = useState(initialFormData);
+
+
+  useEffect(() => {
+    if (business) {
+      setFormData(business);
+    } else {
+      setFormData(initialFormData);
+    }
+  }, [business]);
+
+  useEffect(() => {
+    if (resetForm) {
+      setFormData(initialFormData);
+    }
+  }, [resetForm]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    await onSubmit(formData);
+   
   };
 
   const handleCancel = () => {

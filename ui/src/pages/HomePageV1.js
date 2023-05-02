@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+
+import "./HomePage.css";
 import SearchBar from "../components/SearchBar";
 import api from "../api";
-import "./Dashboard.css";
 
 import BusinessList from "../components/BusinessList";
 
-const Dashboard = () => {
+const HomePage = () => {
   const searchBusinesses = async (location) => {
     try {
-      if (!location) location = "";
+      if(!location)
+      location = '';
       const response = await api.get(`/businesses/search?location=${location}`);
 
       return response.data;
@@ -27,13 +29,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <main>
-        <h2>Welcome Kishore!</h2>
-        <SearchBar onSearch={handleSearch} />
-        <BusinessList businesses={businesses} />
-        <div className="content-grid">
-          <section className="benefits">
+    <div>
+      <h2>Welcome to QueueHero</h2>
+      <SearchBar onSearch={handleSearch} />
+      <BusinessList businesses={businesses} />
+      <div className="homepage">
+        <main>
+          <section className="features">
             <h2>Features</h2>
             <ul>
               <li>Real-time waitlist updates</li>
@@ -54,11 +56,34 @@ const Dashboard = () => {
               <li>Improve customer satisfaction and experience</li>
             </ul>
           </section>
-         
-        </div>
-      </main>
+          <section className="pricing">
+            <h2>Pricing</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Price</th>
+                  <th>Features</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Free</td>
+                  <td>$0/month</td>
+                  <td>Basic waitlist management</td>
+                </tr>
+                <tr>
+                  <td>Pro</td>
+                  <td>$29.99/month</td>
+                  <td>All features, priority support</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </main>
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default HomePage;

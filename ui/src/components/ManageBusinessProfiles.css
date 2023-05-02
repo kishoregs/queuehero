@@ -1,0 +1,22 @@
+.manage-businesses {
+    padding: 2rem;
+}
+
+.manage-businesses h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.profiles-and-form {
+    display: flex;
+    gap: 2rem;
+}
+
+.profiles {
+    flex: 1;
+    gap: 1.5rem;
+}
+
+.form {
+    flex: 1;
+}

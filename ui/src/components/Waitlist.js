@@ -22,7 +22,7 @@ const Waitlist = ({ businessId }) => {
     fetchWaitlist();
   };
 
-  return (
+  return (waitlist && waitlist.length > 0 &&
     <div className="waitlist-container">
       <h3>Waitlist</h3>
       <table className="waitlist">

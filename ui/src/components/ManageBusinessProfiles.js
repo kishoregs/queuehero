@@ -1,12 +1,16 @@
 // ManageBusinessProfiles.js
 import React, { useState, useEffect } from "react";
+
+
 import BusinessProfile from "./BusinessProfile";
 import BusinessForm from "./BusinessForm";
 import api from "../api";
+import "./ManageBusinessProfiles.css";
 
 const ManageBusinessProfiles = () => {
   const [businesses, setBusinesses] = useState([]);
   const [selectedBusiness, setSelectedBusiness] = useState(null);
+  const [resetForm, setResetForm] = useState(false);
 
   useEffect(() => {
     fetchBusinesses();
@@ -25,17 +29,20 @@ const ManageBusinessProfiles = () => {
     try {
       await api.post("/businesses", businessData);
       fetchBusinesses();
+      setResetForm(true); // Trigger form reset after successful creation
     } catch (error) {
       console.error("Error creating business:", error);
     }
   };
+
+  
 
   const handleUpdate = async (businessData) => {
     try {
       await api.put(`/businesses/${selectedBusiness._id}`, businessData);
       setSelectedBusiness(null);
       fetchBusinesses();
-    } catch (error) {
+    }catch (error) {
       console.error("Error updating business:", error);
     }
   };
@@ -51,7 +58,6 @@ const ManageBusinessProfiles = () => {
 
   return (
     <div className="manage-businesses">
-      <h1>Manage Business Profiles</h1>
       <div className="profiles-and-form">
         <div className="profiles">
           {businesses.map((business) => (
@@ -67,7 +73,7 @@ const ManageBusinessProfiles = () => {
         <div className="form">
           {selectedBusiness ? (
             <div>
-              <h2>Update Business Profile</h2>
+              <h3>Update Business Profile</h3>
               <BusinessForm
                 onSubmit={handleUpdate}
                 business={selectedBusiness}
@@ -75,8 +81,8 @@ const ManageBusinessProfiles = () => {
             </div>
           ) : (
             <div>
-              <h2>Create New Business Profile</h2>
-              <BusinessForm onSubmit={handleCreate} />
+              <h2 className="business-form-container">Create New Business Profile</h2>
+              <BusinessForm onSubmit={handleCreate} resetForm={resetForm} />
             </div>
           )}
         </div>

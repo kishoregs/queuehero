@@ -2,19 +2,19 @@
 import React, { useState, useEffect } from "react";
 import BusinessForm from "./BusinessForm";
 import api from "../api";
-import { useParams } from 'react-router-dom';
-
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditBusinessProfile = () => {
   const [business, setBusiness] = useState(null);
   const businessId = useParams().id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBusiness = async () => {
       try {
-    console.log(businessId);
+        console.log(businessId);
         const response = await api.get(`/businesses/${businessId}`);
-       
+
         setBusiness(response.data);
       } catch (error) {
         console.error("Error fetching business:", error);
@@ -28,6 +28,7 @@ const EditBusinessProfile = () => {
     try {
       await api.put(`/businesses/${businessId}`, businessData);
       alert("Business profile updated successfully");
+      navigate("/manage-businesses"); // navigate back to the manage profile page
     } catch (error) {
       console.error("Error updating business:", error);
       alert("Error updating business profile");

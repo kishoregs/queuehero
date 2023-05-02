@@ -1,0 +1,23 @@
+
+  /* Footer */
+  footer {
+    background-color: #fff;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-top: 1px solid #e0e4e8;
+  }
+  
+  footer .footer-logo h4 {
+    color: #163a5f;
+    font-size: 24px;
+  }
+  
+  footer .footer-links a {
+    color: #163a5f;
+    font-size: 18px;
+    margin-left: 1rem;
+  }
+  
