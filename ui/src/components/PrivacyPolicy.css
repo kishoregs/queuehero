@@ -1,0 +1,25 @@
+.privacy-policy-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2rem 0;
+    font-family: Arial, sans-serif;
+}
+
+.privacy-policy-container h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.privacy-policy-content h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    color: #444;
+}
+
+.privacy-policy-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+}

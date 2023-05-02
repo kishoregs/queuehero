@@ -7,8 +7,11 @@ import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ManageBusinessProfiles from "./components/ManageBusinessProfiles";
-import EditBusinessProfile from './components/EditBusinessProfile';
-
+import EditBusinessProfile from "./components/EditBusinessProfile";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import TermsAndConditions from "./components/TermsAndConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,10 +36,16 @@ function App() {
               path="/manage-businesses"
               element={<ManageBusinessProfiles />}
             />
-             <Route
+            <Route
               path="/edit-business/:id"
               element={<EditBusinessProfile />}
             />
+
+            <Route path="/about" element={<About />} />
+
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
 
