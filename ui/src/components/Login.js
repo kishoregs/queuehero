@@ -17,11 +17,15 @@ const Login = () => {
     try {
       const response = await api.post("/login", { email, password });
 
+      console.log(response);
+
       if (response.status === 200) {
         const { token } = response.data;
 
         // Store the token
         localStorage.setItem("token", token);
+        localStorage.setItem("user", response.data.user.name);
+
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
         // Redirect to the dashboard

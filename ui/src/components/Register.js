@@ -18,11 +18,11 @@ const Register = () => {
       const response = await api.post("/register", { email, password, name });
 
       if (response.status === 201) {
-        alert("Registration successful! You can now log in.");
-        const { token } = response.data;
+        const { token, user } = response.data;
 
         // Store the token
         localStorage.setItem("token", token);
+        localStorage.setItem("user", user.name);
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
         // Redirect to the dashboard

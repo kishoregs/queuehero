@@ -6,6 +6,10 @@ import "./Dashboard.css";
 import BusinessList from "../components/BusinessList";
 
 const Dashboard = () => {
+  const user = localStorage.getItem("user");
+
+
+
   const searchBusinesses = async (location) => {
     try {
       if (!location) location = "";
@@ -29,7 +33,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <main>
-        <h2>Welcome Kishore!</h2>
+        <h2>Welcome {user} !</h2>
         <SearchBar onSearch={handleSearch} />
         <BusinessList businesses={businesses} />
         <div className="content-grid">
