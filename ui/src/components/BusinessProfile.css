@@ -16,20 +16,6 @@
     margin-bottom: 1rem;
 }
 
-.join-waitlist-button {
-    background-color: #117aca;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.join-waitlist-button:hover {
-    background-color: #005ea9;
-}
 
 
 .contact-info p {
@@ -69,7 +55,8 @@ button.delete-button {
 
 .delete-button,
 .edit-button {
-    background-color: #117aca;
+    background-color: #0046be;
+
     color: #ffffff;
     border: none;
     border-radius: 4px;

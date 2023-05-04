@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css"
+import "./Footer.css";
 import logo from "../assets/logo.svg"; // Replace with the path to your logo file
 
 function Footer() {
@@ -13,14 +13,17 @@ function Footer() {
     //   </p>
     // </footer>
     <footer>
-    <div class="footer-logo">
-      <h4>QueueHero</h4>
-    </div>
-    <div class="footer-links">
-      <a href="/terms">Terms &amp; Conditions</a>
-      <a href="/privacy">Privacy Policy</a>
-    </div>
-  </footer>
+      <div class="footer-logo">
+        <h4>QueueHero</h4>
+      </div>
+      <div class="footer-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+    </footer>
   );
 }
 

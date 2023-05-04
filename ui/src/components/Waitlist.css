@@ -52,7 +52,7 @@
 }
 
 .join-waitlist-button {
-  background-color: #0f4c81;
+  background-color: #0046be;
   /* Chase blue color */
   color: #ffffff;
   border: none;
@@ -71,7 +71,7 @@
 }
 
 .join-waitlist-button:active {
-  background-color: #0a2d52;
+  background-color: #005ea9;
   /* Even darker blue */
   transform: scale(1);
 }

@@ -12,20 +12,21 @@ function Header({ isLoggedIn }) {
           <Link to="/">QueueHero</Link>
         </div>
         <ul class="nav-links">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+        {isLoggedIn && (
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+          )}
           {isLoggedIn && (
             <li>
               <Link to="/manage-businesses">Business Profiles</Link>
             </li>
           )}
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
+          {isLoggedIn && (
+            <li>
+              <Link to="/logout">Logout</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
