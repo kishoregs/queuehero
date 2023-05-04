@@ -1,27 +1,18 @@
 import React from "react";
 import "./Footer.css";
-import logo from "../assets/logo.svg"; // Replace with the path to your logo file
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    // <footer>
-    //   <div className="footer-logo">
-    //     <img src={logo} alt="QueueHero Logo" />
-    //   </div>
-    //   <p>
-    //     &copy; {new Date().getFullYear()} QueueHero. All rights reserved.
-    //   </p>
-    // </footer>
     <footer>
       <div class="footer-logo">
         <h4>QueueHero</h4>
       </div>
       <div class="footer-links">
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-
-        <a href="/terms">Terms &amp; Conditions</a>
-        <a href="/privacy">Privacy Policy</a>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/terms">Terms &amp; Conditions</Link>
+        <Link to="/privacy">Privacy Policy</Link>
       </div>
     </footer>
   );

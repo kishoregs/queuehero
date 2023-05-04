@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import { AuthContext } from "../context/AuthContext";
 
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
+  const { setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ const Login = ({ setIsLoggedIn }) => {
 
         // Store the token
         localStorage.setItem("token", token);
+        // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
         // Redirect to the dashboard
         navigate("/dashboard");

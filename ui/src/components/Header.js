@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../assets/logo.svg"; // Replace with the path to your logo file
 // import SearchBar from "./SearchBar";
 
-function Header({ isLoggedIn }) {
+function Header() {
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <header>
       <nav>
-        <div class="logo">
-          <Link to="/">QueueHero</Link>
+        <div className="logo">
+          {isLoggedIn ? (
+            <Link to="/dashboard">QueueHero</Link>
+          ) : (
+            <Link to="/">QueueHero</Link>
+          )}
         </div>
+
         <ul class="nav-links">
-        {isLoggedIn && (
+          {isLoggedIn && (
             <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>

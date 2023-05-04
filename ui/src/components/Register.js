@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
+import { AuthContext } from "../context/AuthContext";
 
-
-const Register = ({ setIsLoggedIn }) => {
+const Register = () => {
+  const { setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +23,7 @@ const Register = ({ setIsLoggedIn }) => {
 
         // Store the token
         localStorage.setItem("token", token);
+        // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
         // Redirect to the dashboard
         navigate("/dashboard");

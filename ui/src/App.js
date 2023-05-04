@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -13,47 +13,47 @@ import Contact from "./components/Contact";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import Logout from "./components/Logout";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <Router>
-      <div className="page-container">
-        <Header isLoggedIn={isLoggedIn} />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/register"
-              element={<Register setIsLoggedIn={setIsLoggedIn} />}
-            />
-            <Route
-              path="/login"
-              element={<Login setIsLoggedIn={setIsLoggedIn} />}
-            />
-            <Route path="/dashboard" element={<Dashboard />} />
+    <AuthProvider>
+      <Router>
+        <div className="page-container">
+          <Header />
+          <div className="content-container">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/dashboard"
+                element={<ProtectedRoute component={Dashboard} />}
+              />
 
-            <Route
-              path="/manage-businesses"
-              element={<ManageBusinessProfiles />}
-            />
-            <Route
-              path="/edit-business/:id"
-              element={<EditBusinessProfile />}
-            />
+              <Route
+                path="/manage-businesses"
+                element={<ProtectedRoute component={ManageBusinessProfiles} />}
+              />
+              <Route
+                path="/edit-business/:id"
+                element={<ProtectedRoute component={EditBusinessProfile} />}
+              />
 
-            <Route path="/about" element={<About />} />
+              <Route path="/about" element={<About />} />
 
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/terms" element={<TermsAndConditions />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </div>
+
+          <Footer />
         </div>
-
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
