@@ -18,7 +18,7 @@ function Header() {
           )}
         </div>
 
-        <ul class="nav-links">
+        <ul className="nav-links">
           {isLoggedIn && (
             <li>
               <Link to="/dashboard">Dashboard</Link>

@@ -8,6 +8,8 @@ import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Login = () => {
     try {
       const response = await api.post("/login", { email, password });
 
-      console.log(response);
+
 
       if (response.status === 200) {
         const { token } = response.data;
@@ -28,6 +30,7 @@ const Login = () => {
 
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
+        setUser(response.data.user);
         // Redirect to the dashboard
         navigate("/dashboard");
         // Perform further actions after a successful login, e.g., redirecting to the user dashboard

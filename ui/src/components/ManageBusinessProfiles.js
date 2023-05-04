@@ -1,13 +1,17 @@
 // ManageBusinessProfiles.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 
 import BusinessProfile from "./BusinessProfile";
 import BusinessForm from "./BusinessForm";
 import api from "../api";
+import { AuthContext } from "../context/AuthContext";
+
 import "./ManageBusinessProfiles.css";
 
 const ManageBusinessProfiles = () => {
+  const { user } = useContext(AuthContext); // Access the user object from the context
+
   const [businesses, setBusinesses] = useState([]);
   const [selectedBusiness, setSelectedBusiness] = useState(null);
   const [resetForm, setResetForm] = useState(false);
@@ -18,10 +22,10 @@ const ManageBusinessProfiles = () => {
 
   const fetchBusinesses = async () => {
     try {
-      const response = await api.get("/businesses");
+      const response = await api.get(`/businesses?ownerId=${user._id}`);
       setBusinesses(response.data);
     } catch (error) {
-      console.error("Error fetching businesses:", error);
+      console.error('Error fetching owned businesses:', error);
     }
   };
 

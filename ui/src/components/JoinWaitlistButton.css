@@ -1,0 +1,19 @@
+.join-waitlist-button {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.join-waitlist-button:hover {
+    background-color: #0051a8;
+}
+
+.join-waitlist-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}

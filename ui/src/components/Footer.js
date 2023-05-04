@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer>
-      <div class="footer-logo">
+      <div className="footer-logo">
         <h4>QueueHero</h4>
       </div>
-      <div class="footer-links">
+      <div className="footer-links">
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/terms">Terms &amp; Conditions</Link>

@@ -47,9 +47,21 @@ app.post("/register", async (req, res) => {
 
     const user = new User({ email, password: hashedPassword, name });
 
+    // Generate the JWT token
+    const token = jwt.sign(
+      { _id: user._id.toString() },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    // Save the token to the user's document in the database (optional)
+    user.tokens = user.tokens.concat({ token });
+
     await user.save();
 
-    res.status(201).json({ message: "User created successfully", user});
+    res.status(201).json({ message: "User created successfully", token, user });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

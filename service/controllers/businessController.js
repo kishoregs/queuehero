@@ -3,7 +3,12 @@ const Business = require("../models/business");
 
 exports.getBusinesses = async (req, res) => {
   try {
-    const businesses = await Business.find();
+    const ownerId = req.query.ownerId;
+
+    // If an ownerId is provided, filter businesses by the ownerId
+    const query = ownerId ? { ownerId: ownerId } : {};
+
+    const businesses = await Business.find(query);
     res.json(businesses);
   } catch (error) {
     res.status(500).json({ message: "Error fetching businesses" });
@@ -97,7 +102,7 @@ exports.addCustomerToWaitlist = async (req, res) => {
     const waitTime = req.body.waitTime;
 
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId,name,email,waitTime });
+    business.waitlist.push({ customerId, name, email, waitTime });
     await business.save();
 
     res.status(201).send(business.waitlist);
@@ -136,6 +141,34 @@ exports.getWaitlist = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
     res.send(business.waitlist);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.joinWaitlist = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    if (!business) {
+      return res.status(404).send("Business not found");
+    }
+
+    // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
+    const customerId = req.body.customerId;
+    const name = req.body.name;
+    const email = req.body.email;
+    const waitTime = req.body.waitTime;
+
+    // Add the customer to the waitlist
+    business.waitlist.push({ customerId, name, email, waitTime });
+    await business.save();
+
+    // Calculate the estimated wait time for the customer
+    const estimatedWaitTime = business.waitlist.reduce((acc, curr) => {
+      return acc + curr.waitTime;
+    }, 0);
+
+    res.status(201).send({ waitlist: business.waitlist, estimatedWaitTime });
   } catch (error) {
     res.status(500).send(error);
   }

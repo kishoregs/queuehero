@@ -6,6 +6,8 @@ import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext); // Access the user object from the context
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,6 +27,8 @@ const Register = () => {
         localStorage.setItem("user", user.name);
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
+        setUser(user);
+
         // Redirect to the dashboard
         navigate("/dashboard");
       }
