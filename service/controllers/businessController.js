@@ -76,7 +76,7 @@ exports.deleteBusiness = async (req, res) => {
 exports.searchBusinesses = async (req, res) => {
   try {
     const { location, userId } = req.query;
-    console.log("Received search request:", req.query);
+
     // if (!location) {
     //   return res.status(400).json({ error: "Location is required" });
     // }
@@ -149,6 +149,28 @@ exports.getWaitlist = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
     res.send(business.waitlist);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.unjoinWaitlist = async (req, res) => {
+  try {
+    const business = await Business.findById(req.params.id);
+    if (!business) {
+      return res.status(404).send("Business not found");
+    }
+
+   // Read the customerId from the query parameters
+   const customerId = req.query.customerId;
+
+    // Remove the customer from the waitlist
+    business.waitlist = business.waitlist.filter(
+      (entry) => entry.customerId.toString() !== customerId
+    );
+    await business.save();
+
+    res.status(200).send(business.waitlist);
   } catch (error) {
     res.status(500).send(error);
   }
