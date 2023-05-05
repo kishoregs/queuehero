@@ -18,6 +18,7 @@ function JoinWaitlistButton({ businessId, alreadyJoined }) {
           customerId: user._id, // Use the user's ID from the context
           name: user.name, // Use the user's name from the context
           email: user.email, // Use the user's email from the context
+          phone: user.phone, // Use the user's phone from the context
           waitTime: 15, // Replace this with the actual wait time
         });
       }

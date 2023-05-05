@@ -10,33 +10,46 @@
 .waitlist-container h3 {
   margin-bottom: 10px;
 }
-
 .waitlist {
   width: 100%;
   border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-bottom: 2rem;
+}
+
+.waitlist thead {
+  background-color: #f1f1f1;
 }
 
 .waitlist th,
 .waitlist td {
+  border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ccc;
 }
 
-.waitlist thead {
-  background-color: #1e90ff;
-  color: #fff;
+.waitlist tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.waitlist tr:hover {
+  background-color: #f1f1f1;
+}
+
+.waitlist th {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .update-wait-time-input {
-  width: 50px;
-  padding: 5px;
-  margin-left: 5px;
+  width: 60px;
+  padding: 4px 8px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 5px;
 }
+
 
 .waitlist-form-modal {
   display: flex;
@@ -74,4 +87,19 @@
   background-color: #005ea9;
   /* Even darker blue */
   transform: scale(1);
+}
+
+.waitlist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.waitlist-title {
+  margin: 0;
+}
+
+.waitlist-count {
+  font-size: 16px;
+  margin: 0 0 10px;
 }

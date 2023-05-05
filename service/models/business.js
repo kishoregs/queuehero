@@ -14,8 +14,10 @@ const businessSchema = new mongoose.Schema({
     {
       customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       name: { type: String, required: true },
+      phone: { type: String, required: true }, 
       email: { type: String, required: true },
-      waitTime: { type: Number, default: 0 },
+      waitTime: { type: Number, default: 0 }
+     
     },
   ],
 });

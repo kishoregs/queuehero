@@ -1,4 +1,5 @@
 // controllers/businessController.js
+const { connect } = require("mongoose");
 const Business = require("../models/business");
 
 exports.getBusinesses = async (req, res) => {
@@ -77,6 +78,12 @@ exports.searchBusinesses = async (req, res) => {
   try {
     const { location, userId } = req.query;
 
+      // Return an empty array if the location is empty
+      if (!location) {
+        return res.json([]);
+      }
+  
+
      // Create a case-insensitive regular expression for the location
      const locationRegex = new RegExp(location, 'i');
 
@@ -105,11 +112,12 @@ exports.addCustomerToWaitlist = async (req, res) => {
     // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
     const customerId = req.body.customerId;
     const name = req.body.name;
+    const phone = req.body.phone; 
     const email = req.body.email;
     const waitTime = req.body.waitTime;
 
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId, name, email, waitTime });
+    business.waitlist.push({ customerId, name, phone ,email, waitTime });
     await business.save();
 
     res.status(201).send(business.waitlist);
@@ -185,11 +193,14 @@ exports.joinWaitlist = async (req, res) => {
     // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
     const customerId = req.body.customerId;
     const name = req.body.name;
+    const phone = req.body.phone;
     const email = req.body.email;
     const waitTime = req.body.waitTime;
 
+    console.log(req.body)
+
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId, name, email, waitTime });
+    business.waitlist.push({ customerId, name, phone, email,waitTime });
     await business.save();
 
     // Calculate the estimated wait time for the customer
@@ -199,6 +210,7 @@ exports.joinWaitlist = async (req, res) => {
 
     res.status(201).send({ waitlist: business.waitlist, estimatedWaitTime });
   } catch (error) {
+    console.error(error)
     res.status(500).send(error);
   }
 };

@@ -7,14 +7,14 @@ import { AuthContext } from "../context/AuthContext";
 import BusinessList from "../components/BusinessList";
 
 const Dashboard = () => {
-
-
   const { user } = useContext(AuthContext); // Access the user object from the context
 
   const searchBusinesses = async (location) => {
     try {
       if (!location) location = "";
-      const response = await api.get(`/businesses/search?location=${location}&userId=${user._id}`);
+      const response = await api.get(
+        `/businesses/search?location=${location}&userId=${user._id}`
+      );
 
       return response.data;
     } catch (error) {
@@ -36,7 +36,9 @@ const Dashboard = () => {
       <main>
         <h2>Welcome {user.name} !</h2>
         <SearchBar onSearch={handleSearch} />
-        <BusinessList businesses={businesses} />
+        {businesses && businesses.length > 0 && (
+          <BusinessList businesses={businesses} />
+        )}
         <div className="content-grid">
           <section className="benefits">
             <h2>Features</h2>

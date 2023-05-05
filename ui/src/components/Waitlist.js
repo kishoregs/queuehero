@@ -8,8 +8,7 @@ const Waitlist = ({ businessId }) => {
 
   useEffect(() => {
     fetchWaitlist();
-    
-  },[]);
+  }, []);
 
   const fetchWaitlist = async () => {
     const response = await api.get(`/businesses/${businessId}/waitlist`);
@@ -22,40 +21,49 @@ const Waitlist = ({ businessId }) => {
     fetchWaitlist();
   };
 
-  return (waitlist && waitlist.length > 0 &&
-    <div className="waitlist-container">
-      <h3>Waitlist</h3>
-      <table className="waitlist">
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Email</th>
-            <th>Wait Time</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody className="waitlist-customer">
-          {waitlist.map((entry) => (
-            <tr key={entry.customerId._id} >
-              <td>{entry.name}</td>
-              <td>{entry.email}</td>
-              <td>{entry.waitTime} min</td>
-              <td>
-                <input
-                  type="number"
-                  className="update-wait-time-input"
-                  defaultValue={entry.waitTime}
-                  onChange={(e) =>
-                    handleWaitTimeChange(entry.customerId._id, e.target.value)
-                  }
-                />
-                min
-              </td>
+  return (
+    waitlist &&
+    waitlist.length > 0 && (
+      <div className="waitlist-container">
+        <div className="waitlist-header">
+          <h3 className="waitlist-title">Waitlist</h3>
+          {/* Display the count of the waitlist */}
+          <p className="waitlist-count">Total Customers: {waitlist.length}</p>
+        </div>
+        <table className="waitlist">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Wait Time</th>
+              <th>Update</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="waitlist-customer">
+            {waitlist.map((entry) => (
+              <tr key={entry.customerId._id}>
+                <td>{entry.name}</td>
+                <td>{entry.phone}</td>
+                <td>{entry.email}</td>
+                <td>{entry.waitTime} min</td>
+                <td>
+                  <input
+                    type="number"
+                    className="update-wait-time-input"
+                    defaultValue={entry.waitTime}
+                    onChange={(e) =>
+                      handleWaitTimeChange(entry.customerId._id, e.target.value)
+                    }
+                  />
+                  min
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
   );
 };
 
