@@ -75,14 +75,22 @@ exports.deleteBusiness = async (req, res) => {
 
 exports.searchBusinesses = async (req, res) => {
   try {
-    const { location } = req.query;
+    const { location, userId } = req.query;
     console.log("Received search request:", req.query);
     // if (!location) {
     //   return res.status(400).json({ error: "Location is required" });
     // }
 
     const businesses = await Business.find({ location });
-    res.status(200).json({ businesses });
+    const businessesWithJoinStatus = businesses.map((business) => {
+      const isJoined = business.waitlist.some(
+        (entry) => entry.customerId.toString() === userId
+      );
+
+      return { ...business.toObject(), isJoined };
+    });
+
+    res.status(200).json({ businessesWithJoinStatus });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }

@@ -26,7 +26,7 @@ const Login = () => {
 
         // Store the token
         localStorage.setItem("token", token);
-        localStorage.setItem("user", response.data.user.name);
+
 
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);

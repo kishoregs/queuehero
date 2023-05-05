@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import api from "../api";
 import { AuthContext } from "../context/AuthContext";
 
-function JoinWaitlistButton({ businessId }) {
-  const [joined, setJoined] = useState(false);
+function JoinWaitlistButton({ businessId, alreadyJoined }) {
+  const [joined, setJoined] = useState(alreadyJoined);
   const { user } = useContext(AuthContext); // Access the user object from the context
 
   const handleJoinWaitlist = async () => {

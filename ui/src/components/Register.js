@@ -24,7 +24,7 @@ const Register = () => {
 
         // Store the token
         localStorage.setItem("token", token);
-        localStorage.setItem("user", user.name);
+
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
         setUser(user);

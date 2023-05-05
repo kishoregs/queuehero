@@ -1,7 +1,6 @@
 // ManageBusinessProfiles.js
 import React, { useState, useEffect, useContext } from "react";
 
-
 import BusinessProfile from "./BusinessProfile";
 import BusinessForm from "./BusinessForm";
 import api from "../api";
@@ -25,7 +24,7 @@ const ManageBusinessProfiles = () => {
       const response = await api.get(`/businesses?ownerId=${user._id}`);
       setBusinesses(response.data);
     } catch (error) {
-      console.error('Error fetching owned businesses:', error);
+      console.error("Error fetching owned businesses:", error);
     }
   };
 
@@ -39,22 +38,25 @@ const ManageBusinessProfiles = () => {
     }
   };
 
-  
-
   const handleUpdate = async (businessData) => {
     try {
       await api.put(`/businesses/${selectedBusiness._id}`, businessData);
       setSelectedBusiness(null);
       fetchBusinesses();
-    }catch (error) {
+    } catch (error) {
       console.error("Error updating business:", error);
     }
   };
 
   const handleDelete = async (businessId) => {
     try {
-      await api.delete(`/businesses/${businessId}`);
-      fetchBusinesses();
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this business?"
+      );
+      if (confirmed) {
+        await api.delete(`/businesses/${businessId}`);
+        fetchBusinesses();
+      }
     } catch (error) {
       console.error("Error deleting business:", error);
     }
@@ -85,7 +87,9 @@ const ManageBusinessProfiles = () => {
             </div>
           ) : (
             <div>
-              <h2 className="business-form-container">Create New Business Profile</h2>
+              <h2 className="business-form-container">
+                Create New Business Profile
+              </h2>
               <BusinessForm onSubmit={handleCreate} resetForm={resetForm} />
             </div>
           )}

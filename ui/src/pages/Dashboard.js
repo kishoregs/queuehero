@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import api from "../api";
 import "./Dashboard.css";
+import { AuthContext } from "../context/AuthContext";
 
 import BusinessList from "../components/BusinessList";
 
 const Dashboard = () => {
-  const user = localStorage.getItem("user");
 
 
+  const { user } = useContext(AuthContext); // Access the user object from the context
 
   const searchBusinesses = async (location) => {
     try {
       if (!location) location = "";
-      const response = await api.get(`/businesses/search?location=${location}`);
+      const response = await api.get(`/businesses/search?location=${location}&userId=${user._id}`);
 
       return response.data;
     } catch (error) {
@@ -24,7 +25,7 @@ const Dashboard = () => {
   const handleSearch = async (searchTerm) => {
     try {
       const data = await searchBusinesses(searchTerm);
-      setBusinesses(data.businesses);
+      setBusinesses(data.businessesWithJoinStatus);
     } catch (error) {
       console.error(error);
     }
@@ -33,7 +34,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <main>
-        <h2>Welcome {user} !</h2>
+        <h2>Welcome {user.name} !</h2>
         <SearchBar onSearch={handleSearch} />
         <BusinessList businesses={businesses} />
         <div className="content-grid">
