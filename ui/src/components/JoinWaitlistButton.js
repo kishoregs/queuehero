@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import api from "../api";
 import { AuthContext } from "../context/AuthContext";
+import "./JoinWaitlistButton.css"
 
-function JoinWaitlistButton({ businessId, alreadyJoined }) {
+function JoinWaitlistButton({ businessId, alreadyJoined, waitlistCount }) {
   const [joined, setJoined] = useState(alreadyJoined);
   const { user } = useContext(AuthContext); // Access the user object from the context
 
@@ -30,7 +31,8 @@ function JoinWaitlistButton({ businessId, alreadyJoined }) {
 
   return (
     <button className="join-waitlist-button" onClick={handleJoinWaitlist}>
-      {joined ? "Unjoin Waitlist" : "Join Waitlist"}
+      {joined ? "Unjoin Waitlist" : "Join Waitlist"}{" "}
+      <span className="waitlist-count-badge">{waitlistCount}</span>
     </button>
   );
 }

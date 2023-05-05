@@ -93,7 +93,9 @@ exports.searchBusinesses = async (req, res) => {
         (entry) => entry.customerId.toString() === userId
       );
 
-      return { ...business.toObject(), isJoined };
+      const waitlistCount = business.waitlist.length;
+
+      return { ...business.toObject(), isJoined, waitlistCount };
     });
 
     res.status(200).json({ businessesWithJoinStatus });

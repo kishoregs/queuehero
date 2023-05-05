@@ -16,4 +16,17 @@
     background-color: #999;
     cursor: not-allowed;
   }
+
+  .waitlist-count-badge {
+    display: inline-block;
+    padding: 4px 8px; /* Increase padding to make the badge bigger */
+    font-size: 1em; /* Increase font-size */
+    font-weight: bold;
+    color: #fff;
+    background-color: #f44336;
+    border-radius: 12px; /* Increase border-radius for a more rounded appearance */
+    vertical-align: top; /* Align the badge to the top to make it raised */
+    margin-top: -20px; /* Adjust the position of the badge to fine-tune the raised appearance */
+  }
+  
   

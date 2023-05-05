@@ -10,7 +10,7 @@ const BusinessList = ({ businesses }) => {
         <div key={business._id} className="business-card">
           <h3>{business.name}</h3>
           <p>{business.address}</p>
-          <JoinWaitlistButton businessId={business._id} alreadyJoined={business.isJoined} />
+          <JoinWaitlistButton businessId={business._id} alreadyJoined={business.isJoined} waitlistCount = {business.waitlistCount} />
           {business.waitTime && (
             <p>Estimated wait time: {business.waitTime} minutes</p>
           )}
