@@ -77,11 +77,10 @@ exports.searchBusinesses = async (req, res) => {
   try {
     const { location, userId } = req.query;
 
-    // if (!location) {
-    //   return res.status(400).json({ error: "Location is required" });
-    // }
+     // Create a case-insensitive regular expression for the location
+     const locationRegex = new RegExp(location, 'i');
 
-    const businesses = await Business.find({ location });
+    const businesses = await Business.find({ location: locationRegex });
     const businessesWithJoinStatus = businesses.map((business) => {
       const isJoined = business.waitlist.some(
         (entry) => entry.customerId.toString() === userId
