@@ -1,9 +1,14 @@
 import { useContext, useState } from "react";
 import api from "../api";
 import { AuthContext } from "../context/AuthContext";
-import "./JoinWaitlistButton.css"
+import "./JoinWaitlistButton.css";
 
-function JoinWaitlistButton({ businessId, alreadyJoined, waitlistCount }) {
+function JoinWaitlistButton({
+  businessId,
+  alreadyJoined,
+  waitlistCount,
+  updateWaitlistCount,
+}) {
   const [joined, setJoined] = useState(alreadyJoined);
   const { user } = useContext(AuthContext); // Access the user object from the context
 
@@ -24,6 +29,7 @@ function JoinWaitlistButton({ businessId, alreadyJoined, waitlistCount }) {
         });
       }
       setJoined(!joined);
+      updateWaitlistCount();
     } catch (error) {
       console.error("Error joining waitlist:", error);
     }

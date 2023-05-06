@@ -34,7 +34,7 @@ app.listen(port, () => {
 
 // Registration endpoint
 app.post("/register", async (req, res) => {
-  const { email, password, name } = req.body;
+  const { name, phone, email, password } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -45,7 +45,7 @@ app.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ email, password: hashedPassword, name });
+    const user = new User({ email, phone, password: hashedPassword, name });
 
     // Generate the JWT token
     const token = jwt.sign(

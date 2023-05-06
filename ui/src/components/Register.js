@@ -10,14 +10,19 @@ const Register = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/register", { email, password, name });
+      const response = await api.post("/register", {
+        name,
+        phone,
+        email,
+        password,
+      });
 
       if (response.status === 201) {
         const { token, user } = response.data;
@@ -52,9 +57,23 @@ const Register = () => {
             <input
               type="text"
               id="name"
+              placeholder="Your Name"
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="name">Phone</label>
+            <input
+              type="tel"
+              placeholder="Your Phone Number"
+              id="phone"
+              name="name"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="form-control"
               required
             />
@@ -65,6 +84,7 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
@@ -77,6 +97,7 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Your Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"

@@ -42,7 +42,7 @@ ul {
 .app-body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
-  /* height: 100vh; */
+  height: 100vh;
   background-color: var(--bg-color);
   color: var(--text-color);
 }

@@ -8,6 +8,7 @@ import BusinessList from "../components/BusinessList";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext); // Access the user object from the context
+  const [lastSearchTerm, setLastSearchTerm] = useState("");
 
   const searchBusinesses = async (location) => {
     try {
@@ -24,8 +25,10 @@ const Dashboard = () => {
   const [businesses, setBusinesses] = useState([]);
   const handleSearch = async (searchTerm) => {
     try {
+      searchTerm = searchTerm || lastSearchTerm;
       const data = await searchBusinesses(searchTerm);
       setBusinesses(data.businessesWithJoinStatus);
+      setLastSearchTerm(searchTerm);
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +40,10 @@ const Dashboard = () => {
         <h2>Welcome {user.name} !</h2>
         <SearchBar onSearch={handleSearch} />
         {businesses && businesses.length > 0 && (
-          <BusinessList businesses={businesses} />
+          <BusinessList
+            businesses={businesses}
+            updateWaitlistCount={handleSearch}
+          />
         )}
         <div className="content-grid">
           <section className="benefits">
