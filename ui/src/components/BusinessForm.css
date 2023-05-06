@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    background-color: #f8f8f8;
+
     border-radius: 5px;
   }
   
@@ -43,7 +43,7 @@
   }
   
   .cancel-button {
-    background-color: #ccc;
+
     color: #333;
   }
   

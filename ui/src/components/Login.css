@@ -5,11 +5,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f7f8fa;
+
   }
   
   .login-form {
-    background-color: #fff;
+
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
@@ -19,7 +19,7 @@
   .login-form h2 {
     font-size: 24px;
     margin-bottom: 1rem;
-    color: #163a5f;
+    
     text-align: center;
   }
   
@@ -45,7 +45,7 @@
     font-size: 18px;
     border: none;
     border-radius: 5px;
-    color: #fff;
+   
     background-color: #0046be;
     cursor: pointer;
   }
@@ -58,7 +58,6 @@
     display: block;
     text-align: center;
     font-size: 16px;
-    color: #163a5f;
     margin-top: 1rem;
   }
   

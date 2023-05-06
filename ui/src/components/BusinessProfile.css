@@ -12,7 +12,7 @@
 .business-info h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #002d72;
+
     margin-bottom: 1rem;
 }
 
@@ -25,7 +25,7 @@
 
 .contact-info label {
     font-weight: 600;
-    color: #3a3a3a;
+
     margin-right: 5px;
     display: inline-block;
 }

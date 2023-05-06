@@ -8,18 +8,18 @@
 .terms-and-conditions-container h1 {
     font-size: 2rem;
     text-align: center;
-    color: #333;
+
     margin-bottom: 2rem;
 }
 
 .terms-and-conditions-content h2 {
     font-size: 1.5rem;
     margin: 1.5rem 0;
-    color: #444;
+
 }
 
 .terms-and-conditions-content p {
     font-size: 1rem;
     line-height: 1.5;
-    color: #555;
+
 }

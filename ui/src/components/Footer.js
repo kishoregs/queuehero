@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import ThemeSwitch from "./ThemeSwitch";
 
 function Footer() {
   return (
@@ -13,6 +14,9 @@ function Footer() {
         <Link to="/contact">Contact</Link>
         <Link to="/terms">Terms &amp; Conditions</Link>
         <Link to="/privacy">Privacy Policy</Link>
+      </div>
+      <div className="footer-theme-switch">
+        <ThemeSwitch />
       </div>
     </footer>
   );

@@ -4,18 +4,57 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Light mode variables */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  /* Add other variables for light mode */
+  --hero-bg-color:  #0046be;
+}
+
+.dark-mode {
+  /* Dark mode variables */
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  /* Add other variables for dark mode */
+  --hero-bg-color: #002a5c;
+}
+
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
-  background-color: #f7f8fa;
+  background-color: var(--bg-color) !important;
+  ;
+  color: var(--text-color) !important;
+
 }
+
 a {
   text-decoration: none;
-  color: #163a5f;
+  color: var(--text-color);
+
 }
 
 ul {
   list-style: none;
 }
 
+.app-body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  /* height: 100vh; */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 
+.content-container {
+  height: 83vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* For Firefox */
+}
+
+.content-container::-webkit-scrollbar {
+  width: 0;
+  /* For Chrome, Safari, and Edge */
+}

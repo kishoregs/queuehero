@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -15,45 +15,56 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import Logout from "./components/Logout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ThemeContext } from "./context/ThemeContext";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 function App() {
+  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
+  const themeClass = isDarkMode ? "dark-mode" : "";
+
   return (
-    <AuthProvider>
-      <Router>
-        <div className="page-container">
-          <Header />
-          <div className="content-container">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/dashboard"
-                element={<ProtectedRoute component={Dashboard} />}
-              />
+    <div className={`app-body ${themeClass}`}>
+      <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+        <AuthProvider>
+          <Router>
+            <div>
+              <Header />
+              <div className="content-container">
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route
+                    path="/dashboard"
+                    element={<ProtectedRoute component={Dashboard} />}
+                  />
 
-              <Route
-                path="/manage-businesses"
-                element={<ProtectedRoute component={ManageBusinessProfiles} />}
-              />
-              <Route
-                path="/edit-business/:id"
-                element={<ProtectedRoute component={EditBusinessProfile} />}
-              />
+                  <Route
+                    path="/manage-businesses"
+                    element={
+                      <ProtectedRoute component={ManageBusinessProfiles} />
+                    }
+                  />
+                  <Route
+                    path="/edit-business/:id"
+                    element={<ProtectedRoute component={EditBusinessProfile} />}
+                  />
 
-              <Route path="/about" element={<About />} />
+                  <Route path="/about" element={<About />} />
 
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/terms" element={<TermsAndConditions />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/logout" element={<Logout />} />
-            </Routes>
-          </div>
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/terms" element={<TermsAndConditions />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/logout" element={<Logout />} />
+                </Routes>
+              </div>
 
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
+              <Footer />
+            </div>
+          </Router>
+        </AuthProvider>
+      </ThemeContext.Provider>
+    </div>
   );
 }
 

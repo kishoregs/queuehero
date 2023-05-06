@@ -3,7 +3,7 @@
   max-width: 800px;
   margin: 0 auto;
 
-  background-color: #f8f8f8;
+
   border-radius: 5px;
 }
 
@@ -17,9 +17,7 @@
   margin-bottom: 2rem;
 }
 
-.waitlist thead {
-  background-color: #f1f1f1;
-}
+
 
 .waitlist th,
 .waitlist td {
@@ -28,13 +26,8 @@
   text-align: left;
 }
 
-.waitlist tr:nth-child(even) {
-  background-color: #f8f8f8;
-}
 
-.waitlist tr:hover {
-  background-color: #f1f1f1;
-}
+
 
 .waitlist th {
   padding-top: 12px;

@@ -1,0 +1,13 @@
+.theme-switch {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-switch:focus {
+    outline: none;
+}

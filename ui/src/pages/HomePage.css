@@ -1,6 +1,6 @@
 /* Hero Section */
 .hero {
-    background-color: #0046be;
+    background-color: var(--hero-bg-color);
     padding: 3rem 0;
     text-align: center;
   }
@@ -9,12 +9,15 @@
     font-size: 36px;
     margin-bottom: 1rem;
     color: #fff;
+
   }
   
   .hero-text p {
     font-size: 20px;
     margin-bottom: 2rem;
     color: #fff;
+
+
   }
   
   .hero-buttons .btn-primary,
@@ -50,17 +53,17 @@
   .features .feature h3 {
     font-size: 24px;
     margin-bottom: 1rem;
-    color: #163a5f;
+
   }
   
   .features .feature p {
     font-size: 16px;
-    color: #333;
+
   }
   
   /* Testimonials Section */
   .testimonials {
-    background-color: #f7f8fa;
+
     padding: 3rem 0;
     text-align: center;
   }
@@ -68,12 +71,12 @@
   .testimonials h2 {
     font-size: 24px;
     margin-bottom: 2rem;
-    color: #163a5f;
+
   }
   
   .testimonials .testimonial p {
     font-size: 16px;
     margin-bottom: 1rem;
-    color: #333;
+
   }
   
