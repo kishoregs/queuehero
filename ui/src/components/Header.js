@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Header.css";
@@ -7,6 +7,12 @@ import logo from "../assets/logo.svg"; // Replace with the path to your logo fil
 
 function Header() {
   const { isLoggedIn, user } = useContext(AuthContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
     <header>
       <nav>
@@ -31,12 +37,28 @@ function Header() {
           )}
           {isLoggedIn && (
             <li>
-              <Link to="/profile">{user.name}</Link>
-            </li>
-          )}
-          {isLoggedIn && (
-            <li>
-              <Link to="/logout">Logout</Link>
+              <div className="profile-dropdown">
+                <img
+                  className="header-profile-image"
+                  src={
+                    user.profilePhoto
+                      ? `${process.env.REACT_APP_API_BASE_URL}/${user.profilePhoto}`
+                      : "/default-profile-picture.png"
+                  }
+                  alt="Profile"
+                  onClick={toggleDropdown}
+                />
+                {dropdownOpen && (
+                  <div className="dropdown-menu">
+                    <Link to="/profile" onClick={toggleDropdown}>
+                      Profile
+                    </Link>
+                    <Link to="/logout" onClick={toggleDropdown}>
+                      Logout
+                    </Link>
+                  </div>
+                )}
+              </div>
             </li>
           )}
         </ul>
