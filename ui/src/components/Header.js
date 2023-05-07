@@ -6,7 +6,7 @@ import logo from "../assets/logo.svg"; // Replace with the path to your logo fil
 // import SearchBar from "./SearchBar";
 
 function Header() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   return (
     <header>
       <nav>
@@ -26,7 +26,12 @@ function Header() {
           )}
           {isLoggedIn && (
             <li>
-              <Link to="/manage-businesses">Business Profiles</Link>
+              <Link to="/manage-businesses">Business</Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li>
+              <Link to="/profile">{user.name}</Link>
             </li>
           )}
           {isLoggedIn && (

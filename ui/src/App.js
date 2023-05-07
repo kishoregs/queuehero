@@ -16,7 +16,7 @@ import Logout from "./components/Logout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ThemeContext } from "./context/ThemeContext";
-import ThemeSwitch from "./components/ThemeSwitch";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -56,6 +56,10 @@ function App() {
                   <Route path="/terms" element={<TermsAndConditions />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/logout" element={<Logout />} />
+                  <Route
+                    path="/profile"
+                    element={<ProtectedRoute component={Profile} />}
+                  />
                 </Routes>
               </div>
 

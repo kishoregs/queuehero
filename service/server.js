@@ -5,14 +5,18 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const User = require("./models/User");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 const businessRoutes = require("./routes/businessRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/businesses", businessRoutes);
+app.use("/user", userRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const port = process.env.PORT || 3000;
 

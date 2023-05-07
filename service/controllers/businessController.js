@@ -1,5 +1,4 @@
 // controllers/businessController.js
-const { connect } = require("mongoose");
 const Business = require("../models/business");
 
 exports.getBusinesses = async (req, res) => {

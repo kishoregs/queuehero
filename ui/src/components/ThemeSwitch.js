@@ -10,9 +10,9 @@ const ThemeSwitch = () => {
   return (
     <button className="theme-switch" onClick={toggleDarkMode}>
       {isDarkMode ? (
-        <FontAwesomeIcon icon={faSun} />
+        <FontAwesomeIcon icon={faSun} color="yellow"/>
       ) : (
-        <FontAwesomeIcon icon={faMoon} />
+        <FontAwesomeIcon icon={faMoon}/>
       )}
     </button>
   );
