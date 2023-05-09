@@ -9,17 +9,20 @@ import Waitlist from "./Waitlist";
 const BusinessProfile = ({ business, onDelete }) => {
   const [showWaitlistForm, setShowWaitlistForm] = useState(false);
   return (
-    <div>
-      <h3>
-        Manage Existing Business Profiles{" "}
-        <Link className="create-new-link" to="/create-business-profile">
+    <div className="business-profile">
+      <div className="top">
+        <h3>Manage Existing Business Profiles</h3>
+        <Link
+          className="link-button create-new-link"
+          to="/create-business-profile"
+        >
           Create New
         </Link>
-      </h3>
+      </div>
+
       <div className="container">
         <div className="business-info">
-          <h3>
-            {business.name} -{" "}
+          <div className="buttons">
             {true ? (
               <button
                 className="join-waitlist-button"
@@ -30,6 +33,18 @@ const BusinessProfile = ({ business, onDelete }) => {
             ) : (
               <p>Please log in or register to join the waitlist</p>
             )}
+            <button
+              className="delete-button"
+              onClick={() => onDelete(business._id)}
+            >
+              Delete Business
+            </button>
+            <Link className="edit-button" to={`/edit-business/${business._id}`}>
+              Edit Business
+            </Link>
+          </div>
+          <h3>
+            Business - {business.name}
             {showWaitlistForm && (
               <div className="waitlist-form-modal">
                 <WaitlistForm businessId={business._id} />
@@ -39,62 +54,63 @@ const BusinessProfile = ({ business, onDelete }) => {
               </div>
             )}
           </h3>
-          <div>
+          <div className="business-details">
             <div className="contact-info">
               <p>
-                <label>Description</label>
+                <div className="info-container">
+                  <label>Description</label>
 
-                {business.description}
+                  {business.description}
+                </div>
+              </p>
+
+              <p>
+                <div className="info-container">
+                  <label>Location</label>
+                  {business.location}
+                </div>
               </p>
               <p>
-                <label>Location</label>
-                {business.location}
+                <div className="info-container">
+                  <label>Address</label>
+                  {business.address}
+                </div>
               </p>
               <p>
-                <label>Address</label>
-                {business.address}
+                <div className="info-container">
+                  <label>Email</label>
+                  {business.contactEmail}
+                </div>
               </p>
               <p>
-                <label>Email</label>
-                {business.contactEmail}
+                <div className="info-container">
+                  <label>Contact Phone</label>
+                  {business.contactPhone}
+                </div>
               </p>
               <p>
-                <label>Contact Phone</label>
-                {business.contactPhone}
+                <div className="info-container">
+                  <label>Hours</label>
+                  {business.hours}
+                </div>
               </p>
               <p>
-                <label>Hours</label>
-                {business.hours}
+                <div className="info-container">
+                  <label>Services</label>
+                  <ul>
+                    {business.services.map((service, index) => (
+                      <li key={index}>{service}</li>
+                    ))}
+                  </ul>
+                </div>
               </p>
-              <p>
-                <label>Services</label>
-                <ul>
-                  {business.services.map((service, index) => (
-                    <li key={index}>{service}</li>
-                  ))}
-                </ul>
-              </p>
-              <div className="reviews-ratings">
-                {/* ... Reviews and ratings section */}
-              </div>
-              {/* Add Waitlist component here */}
-              <Waitlist businessId={business._id} />
-            </div>
-            <div className="buttons">
-              <button
-                className="delete-button"
-                onClick={() => onDelete(business._id)}
-              >
-                Delete Business
-              </button>
-              <Link
-                className="edit-button"
-                to={`/edit-business/${business._id}`}
-              >
-                Edit Business
-              </Link>
             </div>
           </div>
+          <div className="reviews-ratings">
+            {/* ... Reviews and ratings section */}
+          </div>
+          {/* Add Waitlist component here */}
+          <Waitlist businessId={business._id} />
         </div>
       </div>
     </div>

@@ -1,78 +1,127 @@
-.container {
-    margin-top: 2rem;
+.business-profile {
+
+    margin: 0 auto;
+    padding: 1rem;
+    font-size: 16px;
 }
 
-.business-info {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 1rem;
-}
-
-.business-info h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-
-    margin-bottom: 1rem;
+.info-container {
+    margin-top: .25rem;
+    display: inline-flex;
+    align-items: baseline;
 }
 
 .create-new-link {
+    font-size: 12px;
+    text-decoration: none;
 
-    float: right;
+
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-left: 1rem;
+}
+
+.link-button {
+    display: inline-block;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.link-button:hover {
+    background-color: var(--bg-color);
+
 }
 
 
-.contact-info p {
-    margin-bottom: 0.5rem;
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+.business-info {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.business-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .contact-info label {
-    font-weight: 600;
-
+    font-weight: bold;
     margin-right: 5px;
-    display: inline-block;
 }
 
-.contact-info ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.contact-info ul li {
-    margin-bottom: 0.25rem;
+.contact-info p {
+    margin-bottom: 10px;
 }
 
 .reviews-ratings {
     margin-top: 1rem;
 }
 
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .buttons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1rem;
+    gap: 10px;
 }
 
-button.delete-button {
-    background-color: #d00000;
-}
-
-.delete-button,
-.edit-button {
-    background-color: #0046be;
-
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
+.edit-button,
+.delete-button {
     padding: 8px 12px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 4px;
     text-decoration: none;
-    display: inline-block;
-    margin-left: 0.5rem;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.delete-button:hover,
-.edit-button:hover {
-    background-color: #005ea9;
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.join-waitlist-button {
+
+
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+
+.waitlist-form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
