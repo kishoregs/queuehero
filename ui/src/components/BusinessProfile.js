@@ -10,7 +10,12 @@ const BusinessProfile = ({ business, onDelete }) => {
   const [showWaitlistForm, setShowWaitlistForm] = useState(false);
   return (
     <div>
-      <h2>Manage Business Profiles</h2>
+      <h3>
+        Manage Existing Business Profiles{" "}
+        <Link className="create-new-link" to="/create-business-profile">
+          Create New
+        </Link>
+      </h3>
       <div className="container">
         <div className="business-info">
           <h3>

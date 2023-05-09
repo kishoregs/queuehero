@@ -37,7 +37,7 @@ const EditBusinessProfile = () => {
 
   return (
     <div className="edit-business-profile">
-      <h2>Edit Business Profile</h2>
+      <h3 className="business-form-container">Edit Business Profile</h3>
       {business ? (
         <BusinessForm onSubmit={handleUpdateBusiness} business={business} />
       ) : (

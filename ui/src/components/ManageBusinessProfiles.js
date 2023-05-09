@@ -28,15 +28,7 @@ const ManageBusinessProfiles = () => {
     }
   };
 
-  const handleCreate = async (businessData) => {
-    try {
-      await api.post("/businesses", businessData);
-      fetchBusinesses();
-      setResetForm(true); // Trigger form reset after successful creation
-    } catch (error) {
-      console.error("Error creating business:", error);
-    }
-  };
+  
 
   const handleUpdate = async (businessData) => {
     try {
@@ -75,25 +67,7 @@ const ManageBusinessProfiles = () => {
             />
           ))}
         </div>
-        <br></br>
-        <div className="form">
-          {selectedBusiness ? (
-            <div>
-              <h3>Update Business Profile</h3>
-              <BusinessForm
-                onSubmit={handleUpdate}
-                business={selectedBusiness}
-              />
-            </div>
-          ) : (
-            <div>
-              <h2 className="business-form-container">
-                Create New Business Profile
-              </h2>
-              <BusinessForm onSubmit={handleCreate} resetForm={resetForm} />
-            </div>
-          )}
-        </div>
+       
       </div>
     </div>
   );

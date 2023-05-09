@@ -1,5 +1,4 @@
 .container {
-    max-width: 800px;
     margin-top: 2rem;
 }
 
@@ -16,6 +15,10 @@
     margin-bottom: 1rem;
 }
 
+.create-new-link {
+
+    float: right;
+}
 
 
 .contact-info p {

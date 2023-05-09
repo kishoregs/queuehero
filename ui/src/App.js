@@ -17,6 +17,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ThemeContext } from "./context/ThemeContext";
 import Profile from "./components/Profile/Profile";
+import NewBusinessProfile from "./components/NewBusinessProfile";
 
 function App() {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -59,6 +60,10 @@ function App() {
                   <Route
                     path="/profile"
                     element={<ProtectedRoute component={Profile} />}
+                  />
+                  <Route
+                    path="/create-business-profile"
+                    element={<ProtectedRoute component={NewBusinessProfile} />}
                   />
                 </Routes>
               </div>

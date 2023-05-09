@@ -19,18 +19,6 @@ const initialFormData = {
 const BusinessForm = ({ onSubmit, business, resetForm}) => {
 
  
-
-  // {
-  //   name: business ? business.name : "",
-  //   description: business ? business.description : "",
-  //   location: business ? business.location : "",
-
-  //   address: business ? business.address : "",
-  //   contactEmail: business ? business.contactEmail : "",
-  //   contactPhone: business ? business.contactPhone : "",
-  //   hours: business ? business.hours : "",
-  //   services: business ? business.services : [],
-  // }
   const [formData, setFormData] = useState(initialFormData);
 
 
