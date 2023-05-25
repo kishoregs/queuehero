@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { AuthContext } from "../context/AuthContext";
 
-
 const Login = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
   const { setUser } = useContext(AuthContext);
@@ -19,14 +18,11 @@ const Login = () => {
     try {
       const response = await api.post("/login", { email, password });
 
-
-
       if (response.status === 200) {
         const { token } = response.data;
 
         // Store the token
         localStorage.setItem("token", token);
-
 
         // If the login is successful, set isLoggedIn to true
         setIsLoggedIn(true);
@@ -82,6 +78,11 @@ const Login = () => {
           <div className="form-group">
             <Link to="/register" className="register-link">
               Don't have an account? Register here.
+            </Link>
+          </div>
+          <div className="form-group">
+            <Link to="/forgot-password" className="forgot-password-link">
+              Forgot password?
             </Link>
           </div>
         </form>

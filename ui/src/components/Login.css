@@ -54,14 +54,14 @@
     background-color: #163a5f;
   }
   
-  .login-form .register-link {
+  .login-form .register-link .forgot-password-link{
     display: block;
     text-align: center;
     font-size: 16px;
     margin-top: 1rem;
   }
   
-  .login-form .register-link:hover {
+  .login-form .register-link:hover .forgot-password-link:hover {
     text-decoration: underline;
   }
   

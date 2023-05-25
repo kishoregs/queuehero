@@ -18,6 +18,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { ThemeContext } from "./context/ThemeContext";
 import Profile from "./components/Profile/Profile";
 import NewBusinessProfile from "./components/NewBusinessProfile";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -35,6 +37,10 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+
                   <Route
                     path="/dashboard"
                     element={<ProtectedRoute component={Dashboard} />}
