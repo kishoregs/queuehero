@@ -21,6 +21,8 @@
   border: 1px solid #ccc;
   border-radius: 3px;
   box-sizing: border-box;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .business-form textarea {
