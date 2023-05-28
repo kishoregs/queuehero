@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import BusinessProfile from "./BusinessProfile";
-import BusinessForm from "./BusinessForm";
 import api from "../api";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 import "./ManageBusinessProfiles.css";
 
@@ -13,7 +13,6 @@ const ManageBusinessProfiles = () => {
 
   const [businesses, setBusinesses] = useState([]);
   const [selectedBusiness, setSelectedBusiness] = useState(null);
-  const [resetForm, setResetForm] = useState(false);
 
   useEffect(() => {
     fetchBusinesses();
@@ -27,8 +26,6 @@ const ManageBusinessProfiles = () => {
       console.error("Error fetching owned businesses:", error);
     }
   };
-
-  
 
   const handleUpdate = async (businessData) => {
     try {
@@ -56,6 +53,17 @@ const ManageBusinessProfiles = () => {
 
   return (
     <div className="manage-businesses">
+      <div className="top">
+        <h3>Manage Business Profiles </h3>
+        &nbsp;&nbsp;|
+        <Link
+          className="link-button create-new-link"
+          to="/create-business-profile"
+        >
+          Create New
+        </Link>
+      </div>
+
       <div className="profiles-and-form">
         <div className="profiles">
           {businesses.map((business) => (
@@ -67,7 +75,6 @@ const ManageBusinessProfiles = () => {
             />
           ))}
         </div>
-       
       </div>
     </div>
   );
