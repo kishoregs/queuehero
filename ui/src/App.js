@@ -29,7 +29,7 @@ function App() {
     <div className={`app-body ${themeClass}`}>
       <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
         <AuthProvider>
-          <Router>
+          <Router basename={process.env.PUBLIC_URL}>
             <div>
               <Header />
               <div className="content-container">
