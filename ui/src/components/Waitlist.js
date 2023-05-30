@@ -1,4 +1,3 @@
-// Waitlist.js
 import React, { useState, useEffect } from "react";
 import api from "../api";
 import "./Waitlist.css";
@@ -13,11 +12,16 @@ const Waitlist = ({ businessId }) => {
   const fetchWaitlist = async () => {
     const response = await api.get(`/businesses/${businessId}/waitlist`);
     setWaitlist(response.data);
-
   };
 
   const handleWaitTimeChange = async (userId, waitTime) => {
     await api.put(`/businesses/${businessId}/waitlist/${userId}`, { waitTime });
+    fetchWaitlist();
+  };
+
+  const handleRemoveCustomer = async (userId) => {
+    let req = `/businesses/${businessId}/unjoin-waitlist?customerId=${userId}`;
+    await api.delete(req);
     fetchWaitlist();
   };
 
@@ -27,7 +31,6 @@ const Waitlist = ({ businessId }) => {
       <div className="waitlist-container">
         <div className="waitlist-header">
           <h3 className="waitlist-title">Waitlist</h3>
-          {/* Display the count of the waitlist */}
           <p className="waitlist-count">Total Customers: {waitlist.length}</p>
         </div>
         <table className="waitlist">
@@ -38,11 +41,12 @@ const Waitlist = ({ businessId }) => {
               <th>Email</th>
               <th>Wait Time</th>
               <th>Update</th>
+              <th>Remove</th>
             </tr>
           </thead>
           <tbody className="waitlist-customer">
             {waitlist.map((entry) => (
-              <tr key={entry.customerId._id}>
+              <tr key={entry.customerId}>
                 <td>{entry.name}</td>
                 <td>{entry.phone}</td>
                 <td>{entry.email}</td>
@@ -53,10 +57,18 @@ const Waitlist = ({ businessId }) => {
                     className="update-wait-time-input"
                     defaultValue={entry.waitTime}
                     onChange={(e) =>
-                      handleWaitTimeChange(entry.customerId._id, e.target.value)
+                      handleWaitTimeChange(entry.customerId, e.target.value)
                     }
                   />
                   min
+                </td>
+                <td>
+                  <button
+                    className="remove-customer-button"
+                    onClick={() => handleRemoveCustomer(entry.customerId)}
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
