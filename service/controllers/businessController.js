@@ -94,7 +94,12 @@ exports.searchBusinesses = async (req, res) => {
 
       const waitlistCount = business.waitlist.length;
 
-      return { ...business.toObject(), isJoined, waitlistCount };
+      // Calculate the estimated wait time for the customer
+    const estimatedWaitTime = business.waitlist.reduce((acc, curr) => {
+      return acc + curr.waitTime;
+    }, 0);
+
+      return { ...business.toObject(), isJoined, waitlistCount,estimatedWaitTime };
     });
 
     res.status(200).json({ businessesWithJoinStatus });

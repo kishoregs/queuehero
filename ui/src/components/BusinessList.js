@@ -3,7 +3,6 @@ import "./BusinessList.css";
 import JoinWaitlistButton from "./JoinWaitlistButton";
 
 const BusinessList = ({ businesses, updateWaitlistCount }) => {
-
   return (
     <div className="business-list">
       {businesses.map((business) => (
@@ -14,10 +13,13 @@ const BusinessList = ({ businesses, updateWaitlistCount }) => {
             businessId={business._id}
             alreadyJoined={business.isJoined}
             waitlistCount={business.waitlistCount}
-            updateWaitlistCount = {updateWaitlistCount}
+            updateWaitlistCount={updateWaitlistCount}
+            estimatedWaitTime={business.estimatedWaitTime}
           />
-          {business.waitTime && (
-            <p>Estimated wait time: {business.waitTime} minutes</p>
+          {business.estimatedWaitTime && (
+            <span className="estimated-wait-time">
+              Estimated wait time: {business.estimatedWaitTime} minutes
+            </span>
           )}
         </div>
       ))}
