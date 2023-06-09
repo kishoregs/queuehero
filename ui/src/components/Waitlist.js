@@ -12,12 +12,17 @@ const Waitlist = ({ businessId }) => {
 
   useEffect(() => {
     fetchWaitlist();
-    const intervalId = setInterval(fetchWaitlist, 15000); // fetch every 5 seconds
 
-    // Cleanup interval on unmount
-    return () => clearInterval(intervalId);
+    const shouldPollWaitlist =
+      process.env.REACT_APP_POLL_WAITLIST_UPDATE === "true";
+
+    if (shouldPollWaitlist) {
+      const intervalId = setInterval(fetchWaitlist, 5000); // fetch every 5 seconds
+
+      // Cleanup interval on unmount
+      return () => clearInterval(intervalId);
+    }
   }, [businessId]);
-
 
   const handleWaitTimeChange = async (userId, waitTime) => {
     await api.put(`/businesses/${businessId}/waitlist/${userId}`, { waitTime });
