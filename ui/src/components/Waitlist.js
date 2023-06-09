@@ -5,14 +5,19 @@ import "./Waitlist.css";
 const Waitlist = ({ businessId }) => {
   const [waitlist, setWaitlist] = useState([]);
 
-  useEffect(() => {
-    fetchWaitlist();
-  }, []);
-
   const fetchWaitlist = async () => {
     const response = await api.get(`/businesses/${businessId}/waitlist`);
     setWaitlist(response.data);
   };
+
+  useEffect(() => {
+    fetchWaitlist();
+    const intervalId = setInterval(fetchWaitlist, 15000); // fetch every 5 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [businessId]);
+
 
   const handleWaitTimeChange = async (userId, waitTime) => {
     await api.put(`/businesses/${businessId}/waitlist/${userId}`, { waitTime });
