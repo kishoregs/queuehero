@@ -10,11 +10,11 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext); // Access the user object from the context
   const [lastSearchTerm, setLastSearchTerm] = useState("");
 
-  const searchBusinesses = async (location) => {
+  const searchBusinesses = async (searchTerm) => {
     try {
-      if (!location) location = "";
+      if (!searchTerm) searchTerm = "";
       const response = await api.get(
-        `/businesses/search?location=${location}&userId=${user._id}`
+        `/businesses/search?searchTerm=${searchTerm}&userId=${user._id}`
       );
 
       return response.data;

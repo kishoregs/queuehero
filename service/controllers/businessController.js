@@ -75,18 +75,23 @@ exports.deleteBusiness = async (req, res) => {
 
 exports.searchBusinesses = async (req, res) => {
   try {
-    const { location, userId } = req.query;
+    const { searchTerm, userId } = req.query;
 
-      // Return an empty array if the location is empty
-      if (!location) {
-        return res.json([]);
-      }
-  
+    // Return an empty array if the search term is empty
+    if (!searchTerm) {
+      return res.json([]);
+    }
 
-     // Create a case-insensitive regular expression for the location
-     const locationRegex = new RegExp(location, 'i');
+    // Create a case-insensitive regular expression for the search term
+    const searchTermRegex = new RegExp(searchTerm, 'i');
 
-    const businesses = await Business.find({ location: locationRegex });
+    const businesses = await Business.find({
+      $or: [
+        { location: searchTermRegex },
+        { name: searchTermRegex },
+      ],
+    });
+
     const businessesWithJoinStatus = businesses.map((business) => {
       const isJoined = business.waitlist.some(
         (entry) => entry.customerId.toString() === userId
@@ -95,11 +100,11 @@ exports.searchBusinesses = async (req, res) => {
       const waitlistCount = business.waitlist.length;
 
       // Calculate the estimated wait time for the customer
-    const estimatedWaitTime = business.waitlist.reduce((acc, curr) => {
-      return acc + curr.waitTime;
-    }, 0);
+      const estimatedWaitTime = business.waitlist.reduce((acc, curr) => {
+        return acc + curr.waitTime;
+      }, 0);
 
-      return { ...business.toObject(), isJoined, waitlistCount,estimatedWaitTime };
+      return { ...business.toObject(), isJoined, waitlistCount, estimatedWaitTime };
     });
 
     res.status(200).json({ businessesWithJoinStatus });
