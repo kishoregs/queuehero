@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch }) => {
       <input
         type="text"
         className="search-input"
-        placeholder="Search by location"
+        placeholder="Search by area, business name, services offered, or description"
         value={searchTerm}
         onChange={handleChange}
       />

@@ -1,18 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "../assets/logo.svg"; // Replace with the path to your logo file
+
 // import SearchBar from "./SearchBar";
 
 function Header() {
   const { isLoggedIn, user } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const dropdownRef = useRef(null); // ref to track the dropdown element
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // if the click is outside of the dropdown, then close it
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    // add the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []); // empty dependency array ensures this only runs once
   return (
     <header>
       <nav>
@@ -37,7 +53,7 @@ function Header() {
           )}
           {isLoggedIn && (
             <li>
-              <div className="profile-dropdown">
+              <div className="profile-dropdown" ref={dropdownRef}>
                 <img
                   className="header-profile-image"
                   src={

@@ -83,12 +83,15 @@ exports.searchBusinesses = async (req, res) => {
     }
 
     // Create a case-insensitive regular expression for the search term
-    const searchTermRegex = new RegExp(searchTerm, 'i');
+    const searchTermRegex = new RegExp(searchTerm, "i");
 
     const businesses = await Business.find({
       $or: [
         { location: searchTermRegex },
+        { address: searchTermRegex },
         { name: searchTermRegex },
+        { description: searchTermRegex },
+        { services: searchTermRegex },
       ],
     });
 
@@ -104,7 +107,12 @@ exports.searchBusinesses = async (req, res) => {
         return acc + curr.waitTime;
       }, 0);
 
-      return { ...business.toObject(), isJoined, waitlistCount, estimatedWaitTime };
+      return {
+        ...business.toObject(),
+        isJoined,
+        waitlistCount,
+        estimatedWaitTime,
+      };
     });
 
     res.status(200).json({ businessesWithJoinStatus });
@@ -123,12 +131,12 @@ exports.addCustomerToWaitlist = async (req, res) => {
     // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
     const customerId = req.body.customerId;
     const name = req.body.name;
-    const phone = req.body.phone; 
+    const phone = req.body.phone;
     const email = req.body.email;
     const waitTime = req.body.waitTime;
 
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId, name, phone ,email, waitTime });
+    business.waitlist.push({ customerId, name, phone, email, waitTime });
     await business.save();
 
     res.status(201).send(business.waitlist);
@@ -179,8 +187,8 @@ exports.unjoinWaitlist = async (req, res) => {
       return res.status(404).send("Business not found");
     }
 
-   // Read the customerId from the query parameters
-   const customerId = req.query.customerId;
+    // Read the customerId from the query parameters
+    const customerId = req.query.customerId;
 
     // Remove the customer from the waitlist
     business.waitlist = business.waitlist.filter(
@@ -208,10 +216,10 @@ exports.joinWaitlist = async (req, res) => {
     const email = req.body.email;
     const waitTime = req.body.waitTime;
 
-    console.log(req.body)
+    console.log(req.body);
 
     // Add the customer to the waitlist
-    business.waitlist.push({ customerId, name, phone, email,waitTime });
+    business.waitlist.push({ customerId, name, phone, email, waitTime });
     await business.save();
 
     // Calculate the estimated wait time for the customer
@@ -221,7 +229,7 @@ exports.joinWaitlist = async (req, res) => {
 
     res.status(201).send({ waitlist: business.waitlist, estimatedWaitTime });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).send(error);
   }
 };
