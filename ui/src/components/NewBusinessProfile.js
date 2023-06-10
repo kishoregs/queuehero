@@ -1,21 +1,23 @@
 // ManageBusinessProfiles.js
-import React, { useState} from "react";
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import BusinessForm from "./BusinessForm";
 import api from "../api";
-
 
 import "./ManageBusinessProfiles.css";
 
 const NewBusinessProfile = () => {
   const [resetForm, setResetForm] = useState(false);
+  const navigate = useNavigate();
 
   const handleCreate = async (businessData) => {
     try {
       await api.post("/businesses", businessData);
 
       setResetForm(true); // Trigger form reset after successful creation
+
+      navigate(-1);
     } catch (error) {
       console.error("Error creating business:", error);
     }

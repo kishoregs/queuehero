@@ -46,6 +46,7 @@ function Header() {
                       : "/default-profile-picture.png"
                   }
                   alt="Profile"
+                  title={user.name} // Tooltip will display user's name
                   onClick={toggleDropdown}
                 />
                 {dropdownOpen && (
