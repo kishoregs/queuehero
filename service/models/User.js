@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
   ],
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  twoFASecret: String,
 });
 
 module.exports = mongoose.model("User", userSchema);

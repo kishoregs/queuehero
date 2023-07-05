@@ -12,6 +12,11 @@ const { uploadProfilePhoto } = require("../controllers/userController");
 const fs = require("fs");
 const uploadsFolder = "uploads";
 
+const speakeasy = require('speakeasy');
+const QRCode = require('qrcode');
+
+
+
 if (!fs.existsSync(uploadsFolder)) {
   fs.mkdirSync(uploadsFolder);
 }
@@ -107,6 +112,33 @@ router.post("/reset-password/:token", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Enable 2FA
+router.post('/2fa/enable', isAuthenticated, async (req, res) => {
+  try {
+    const user = req.user;
+
+    // Generate a secret key
+    const secret = speakeasy.generateSecret({
+      length: 20,
+      name: `QueueHero:${user.email}`, // Set the accountname to be the user's id (or email, or other unique identifier)
+      issuer: 'QueueHero', // Set the issuer to be the name of your application
+    });
+
+    // Save the secret key to the user
+    user.twoFASecret = secret.base32;
+    await user.save();
+
+    // Generate a QR code for the user to scan
+    const qrCode = await QRCode.toDataURL(secret.otpauth_url);
+
+    res.json({ qrCode });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'An error occurred while enabling 2FA.' });
+  }
+});
+
 
 
 module.exports = router;

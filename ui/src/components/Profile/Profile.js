@@ -1,11 +1,13 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./Profile.css";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../api";
+import QRCode from "qrcode.react";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
   const fileInputRef = useRef();
+  const [twoFAQRCode, setTwoFAQRCode] = useState(null);
 
   const handleFileUpload = async () => {
     const file = fileInputRef.current.files[0];
@@ -15,6 +17,19 @@ const Profile = () => {
       if (updatedUser) {
         setUser(updatedUser);
       }
+    }
+  };
+
+  const enableTwoFA = async () => {
+    try {
+      const response = await api.post("/user/2fa/enable");
+      console.log(response.data.qrCode);
+
+      setTwoFAQRCode(response.data.qrCode);
+      
+
+    } catch (error) {
+      console.error("Error enabling 2FA:", error);
     }
   };
 
@@ -64,6 +79,14 @@ const Profile = () => {
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
           <button>Change Password</button>
+          {twoFAQRCode ? (
+            <div>
+              <img src={twoFAQRCode} alt="Two-factor authentication QR code" />
+              <p>Scan this QR code with your authenticator app.</p>
+            </div>
+          ) : (
+            <button onClick={enableTwoFA}>Enable 2FA</button>
+          )}
         </div>
       </div>
       <div className="joined-waitlists">
