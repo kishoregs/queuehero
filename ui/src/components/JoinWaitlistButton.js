@@ -25,7 +25,7 @@ function JoinWaitlistButton({
           name: user.name, // Use the user's name from the context
           email: user.email, // Use the user's email from the context
           phone: user.phone, // Use the user's phone from the context
-          waitTime: 15, // Replace this with the actual wait time
+          waitTime: 0, // Replace this with the actual wait time
         });
       }
       setJoined(!joined);
@@ -38,7 +38,9 @@ function JoinWaitlistButton({
   return (
     <button className="join-waitlist-button" onClick={handleJoinWaitlist}>
       {joined ? "Unjoin Waitlist" : "Join Waitlist"}{" "}
-      <span className="waitlist-count-badge">{waitlistCount}</span>
+      {waitlistCount > 0 && (
+        <span className="waitlist-count-badge">{waitlistCount}</span>
+      )}
     </button>
   );
 }

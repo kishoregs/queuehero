@@ -95,22 +95,42 @@ exports.searchBusinesses = async (req, res) => {
       ],
     });
 
+    const averageServiceTime = 15;
+
     const businessesWithJoinStatus = businesses.map((business) => {
       const isJoined = business.waitlist.some(
         (entry) => entry.customerId.toString() === userId
       );
 
-      const waitlistCount = business.waitlist.length;
+      // Calculate the estimated wait time for a new customer
+      let estimatedWaitTime = 0;
 
-      // Calculate the estimated wait time for the customer
-      const estimatedWaitTime = business.waitlist.reduce((acc, curr) => {
-        return acc + curr.waitTime;
-      }, 0);
+      if (!isJoined) {
+        // If the user has not joined and there are users already in the queue,
+        // their wait time should be the total wait time plus the service time
+        if (business.waitlist.length > 0) {
+          estimatedWaitTime = business.waitlist.reduce(
+            (acc, curr) => acc + curr.waitTime,
+            0
+          );
+          estimatedWaitTime += averageServiceTime;
+        }
+      } else {
+        // If the user has joined, their wait time should be the sum of the wait times of the users in front of them in the queue
+        const index = business.waitlist.findIndex(
+          (entry) => entry.customerId.toString() === userId
+        );
+        if (index >= 0) {
+          estimatedWaitTime = business.waitlist
+            .slice(0, index + 1)
+            .reduce((acc, curr) => acc + curr.waitTime, 0);
+        }
+      }
 
       return {
         ...business.toObject(),
         isJoined,
-        waitlistCount,
+        waitlistCount: business.waitlist.length,
         estimatedWaitTime,
       };
     });
@@ -201,7 +221,6 @@ exports.unjoinWaitlist = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
 exports.joinWaitlist = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
@@ -209,14 +228,23 @@ exports.joinWaitlist = async (req, res) => {
       return res.status(404).send("Business not found");
     }
 
-    // Assume req.body.customerId contains the customer's ID and req.body.waitTime contains the wait time
+    // Assume req.body.customerId contains the customer's ID
     const customerId = req.body.customerId;
     const name = req.body.name;
     const phone = req.body.phone;
     const email = req.body.email;
-    const waitTime = req.body.waitTime;
 
-    console.log(req.body);
+    // Assume an average service time of 15 minutes
+    const averageServiceTime = 15;
+
+    // Calculate the wait time based on the current waitlist length and the average service time
+    const currentWaitTime = business.waitlist.reduce((acc, curr) => {
+      return acc + curr.waitTime;
+    }, 0);
+
+    // If it's the first customer, waitTime should be 0, otherwise currentWaitTime + averageServiceTime
+    const waitTime =
+      business.waitlist.length === 0 ? 0 : currentWaitTime + averageServiceTime;
 
     // Add the customer to the waitlist
     business.waitlist.push({ customerId, name, phone, email, waitTime });

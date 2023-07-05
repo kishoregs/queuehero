@@ -16,7 +16,7 @@ const BusinessList = ({ businesses, updateWaitlistCount }) => {
             updateWaitlistCount={updateWaitlistCount}
             estimatedWaitTime={business.estimatedWaitTime}
           />
-          {business.estimatedWaitTime && (
+          {business.estimatedWaitTime > 0 && (
             <span className="estimated-wait-time">
               Estimated wait time: {business.estimatedWaitTime} minutes
             </span>

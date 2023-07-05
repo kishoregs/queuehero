@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import logo from "../assets/QueueHero.png";
 
 // import SearchBar from "./SearchBar";
 
@@ -32,11 +33,21 @@ function Header() {
   return (
     <header>
       <nav>
-        <div className="logo">
+        <div className="logo logo-flex">
           {isLoggedIn ? (
-            <Link to="/dashboard">QueueHero</Link>
+            <Link to="/dashboard" className="logo-link">
+            <div className="logo-container">
+              <img src={logo} alt="QueueHero Logo" className="logo-img" />
+              <span className="logo-text">ueueHero</span>
+            </div>
+          </Link>
           ) : (
-            <Link to="/">QueueHero</Link>
+            <Link to="/" className="logo-link">
+              <div className="logo-container">
+                <img src={logo} alt="QueueHero Logo" className="logo-img" />
+                <span className="logo-text">ueueHero</span>
+              </div>
+            </Link>
           )}
         </div>
 
