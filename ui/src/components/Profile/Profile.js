@@ -2,17 +2,17 @@ import React, { useContext, useRef, useState } from "react";
 import "./Profile.css";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../api";
-import QRCode from "qrcode.react";
+
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
   const fileInputRef = useRef();
-  const [twoFAQRCode, setTwoFAQRCode] = useState(null);
+
 
   const handleFileUpload = async () => {
     const file = fileInputRef.current.files[0];
     if (file) {
-      console.log("calling uploadProfilePhoto");
+
       const updatedUser = await uploadProfilePhoto(file);
       if (updatedUser) {
         setUser(updatedUser);
@@ -22,14 +22,23 @@ const Profile = () => {
 
   const enableTwoFA = async () => {
     try {
-      const response = await api.post("/user/2fa/enable");
-      console.log(response.data.qrCode);
+      const updatedUser = await api.post("/user/2fa/enable");
 
-      setTwoFAQRCode(response.data.qrCode);
-      
-
+      setUser(updatedUser.data.user);
     } catch (error) {
       console.error("Error enabling 2FA:", error);
+    }
+  };
+
+  const disableTwoFA = async () => {
+    try {
+      const resp = await api.post("/user/2fa/disable"); // assuming you've set up this endpoint in your backend
+      if (resp.status === 200) {
+        // assuming a status code of 200 means the operation was successful
+        setUser(resp.data.user);
+      }
+    } catch (error) {
+      console.error("Error disabling 2FA:", error);
     }
   };
 
@@ -79,10 +88,11 @@ const Profile = () => {
           <p>Email: {user.email}</p>
           <p>Phone: {user.phone}</p>
           <button>Change Password</button>
-          {twoFAQRCode ? (
+          {user.twoFAQRCode ? ( 
             <div>
-              <img src={twoFAQRCode} alt="Two-factor authentication QR code" />
+              <img src={user.twoFAQRCode} alt="Two-factor authentication QR code" />
               <p>Scan this QR code with your authenticator app.</p>
+              <button onClick={disableTwoFA}>Disable 2FA</button>
             </div>
           ) : (
             <button onClick={enableTwoFA}>Enable 2FA</button>

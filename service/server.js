@@ -26,7 +26,7 @@ const connectToMongo = async () => {
     mongoose.connect(process.env.MONGODB_URI);
     console.log("Connected to Mongo Successfully!");
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -49,11 +49,11 @@ app.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ email, phone, password: hashedPassword, name });
+    const dbUser = new User({ email, phone, password: hashedPassword, name });
 
     // Generate the JWT token
     const token = jwt.sign(
-      { _id: user._id.toString() },
+      { _id: dbUser._id.toString() },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -61,12 +61,17 @@ app.post("/register", async (req, res) => {
     );
 
     // Save the token to the user's document in the database (optional)
-    user.tokens = user.tokens.concat({ token });
+    dbUser.tokens = dbUser.tokens.concat({ token });
 
-    await user.save();
+    await dbUser.save();
+
+    const user = await User.findOne({ email }).select('_id email name profilePhoto phone twoFAQRCode'); 
+
+
 
     res.status(201).json({ message: "User created successfully", token, user });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 });
@@ -75,13 +80,13 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const dbUser = await User.findOne({ email });
 
-    if (!user) {
+    if (!dbUser) {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(password, dbUser.password);
 
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Invalid credentials" });
@@ -89,7 +94,7 @@ app.post("/login", async (req, res) => {
 
     // Generate the JWT token
     const token = jwt.sign(
-      { _id: user._id.toString() },
+      { _id: dbUser._id.toString() },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -97,13 +102,14 @@ app.post("/login", async (req, res) => {
     );
 
     // Save the token to the user's document in the database (optional)
-    user.tokens = user.tokens.concat({ token });
-    await user.save();
+    dbUser.tokens = dbUser.tokens.concat({ token });
+    await dbUser.save();
 
-    // Send the token and user information to the frontend
-    // res.status(200).json({ success: true, token, user });
+    const user = await User.findOne({ email }).select('_id email name profilePhoto phone twoFAQRCode'); 
+
     res.status(200).json({ message: "Logged in successfully", token, user });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 });

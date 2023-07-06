@@ -5,8 +5,6 @@ exports.uploadProfilePhoto = async (req, res) => {
     const userId = req.user._id;
     const profilePhotoPath = req.file.path;
 
-    console.log("uploadProfilePhoto  - at server");
-
     // Update user's profile photo path in the database
     const updatedUser = await User.findByIdAndUpdate(
       userId,

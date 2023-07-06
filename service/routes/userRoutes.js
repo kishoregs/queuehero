@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-// "profilePhoto" is the field name in the form
+
 router.post(
   "/profile-photo",
   isAuthenticated,
@@ -116,28 +116,55 @@ router.post("/reset-password/:token", async (req, res) => {
 // Enable 2FA
 router.post('/2fa/enable', isAuthenticated, async (req, res) => {
   try {
-    const user = req.user;
+
+    const { email } = req.user;
+
+    const dbUser = await User.findOne({ email });
 
     // Generate a secret key
     const secret = speakeasy.generateSecret({
       length: 20,
-      name: `QueueHero:${user.email}`, // Set the accountname to be the user's id (or email, or other unique identifier)
+      name: `QueueHero:${dbUser.email}`, // Set the accountname to be the user's id (or email, or other unique identifier)
       issuer: 'QueueHero', // Set the issuer to be the name of your application
     });
 
     // Save the secret key to the user
-    user.twoFASecret = secret.base32;
-    await user.save();
+    dbUser.twoFASecret = secret.base32;
 
-    // Generate a QR code for the user to scan
-    const qrCode = await QRCode.toDataURL(secret.otpauth_url);
+     // Generate a QR code for the user to scan
+     dbUser.twoFAQRCode  = await QRCode.toDataURL(secret.otpauth_url);
 
-    res.json({ qrCode });
+     await dbUser.save();    
+
+     const user = await User.findOne({ email }).select('_id email name profilePhoto phone twoFAQRCode'); 
+
+    res.json({ user });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: 'An error occurred while enabling 2FA.' });
   }
 });
+
+router.post('/2fa/disable', isAuthenticated, async (req, res) => {
+  try {
+    const { email } = req.user;
+
+    const dbUser = await User.findOne({ email });
+
+    // Remove the 2FA secret from the user
+    dbUser.twoFASecret = null;
+    dbUser.twoFAQRCode = null;
+    await dbUser.save();
+
+    const user = await User.findOne({ email }).select('_id email name profilePhoto phone twoFAQRCode'); 
+
+    res.status(200).json({ message: "2FA disabled successfully", user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'An error occurred while disabling 2FA.' });
+  }
+});
+
 
 
 

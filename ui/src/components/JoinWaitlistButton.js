@@ -14,6 +14,7 @@ function JoinWaitlistButton({
 
   const handleJoinWaitlist = async () => {
     try {
+
       if (joined) {
         await api.delete(`/businesses/${businessId}/unjoin-waitlist`, {
           params: { customerId: user._id },

@@ -12,7 +12,7 @@ const EditBusinessProfile = () => {
   useEffect(() => {
     const fetchBusiness = async () => {
       try {
-        console.log(businessId);
+
         const response = await api.get(`/businesses/${businessId}`);
 
         setBusiness(response.data);
