@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useContext, useState } from "react";
 import api from "../api";
 import { AuthContext } from "../context/AuthContext";
@@ -14,7 +16,6 @@ function JoinWaitlistButton({
 
   const handleJoinWaitlist = async () => {
     try {
-
       if (joined) {
         await api.delete(`/businesses/${businessId}/unjoin-waitlist`, {
           params: { customerId: user._id },
