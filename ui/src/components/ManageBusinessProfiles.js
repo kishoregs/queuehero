@@ -1,4 +1,5 @@
 // ManageBusinessProfiles.js
+
 import React, { useState, useEffect, useContext } from "react";
 
 import BusinessProfile from "./BusinessProfile";

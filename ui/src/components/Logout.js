@@ -1,9 +1,10 @@
 // Logout.js
+import React from "react";
+
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../auth";
 import { AuthContext } from "../context/AuthContext";
-
 
 const Logout = () => {
   const navigate = useNavigate();
