@@ -4,12 +4,15 @@
   box-sizing: border-box;
 }
 
+#sentry-feedback {
+  padding-right: 450px !important;
+}
 :root {
   /* Light mode variables */
   --bg-color: #ffffff;
   --text-color: #000000;
   /* Add other variables for light mode */
-  --hero-bg-color:  #0046be;
+  --hero-bg-color: #0046be;
 }
 
 .dark-mode {
@@ -21,18 +24,15 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   line-height: 1.6;
   background-color: var(--bg-color) !important;
-  ;
   color: var(--text-color) !important;
-
 }
 
 a {
   text-decoration: none;
   color: var(--text-color);
-
 }
 
 ul {
@@ -40,7 +40,7 @@ ul {
 }
 
 .app-body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   line-height: 1.6;
   height: 100vh;
   background-color: var(--bg-color);
